@@ -1,103 +1,103 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen relative">
+      {/* Initials in top left corner */}
+      <div className="absolute top-8 left-8">
+        <h1 className="text-5xl font-bold" style={{fontFamily: 'SnackerComic, sans-serif'}}>RJW</h1>
+      </div>
+      
+        {/* Full name in center */}
+          <div className="flex flex-col items-center justify-center min-h-screen gap-8">
+            {/* First 4 boxes above name - horizontal scrollable */}
+            <div className="w-full overflow-x-auto">
+              <div className="flex flex-row gap-8 justify-start min-w-max px-4">
+              {/* Bio box */}
+              <div className="relative max-w-md bio-box">
+                <img 
+                  src="/images/boxes/bio.png" 
+                  alt="Bio" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-2 left-2 box-number">01</div>
+                <div className="absolute bottom-2 left-2 box-label">bio</div>
+              </div>
+              
+              {/* Career box */}
+              <div className="relative max-w-md career-box">
+                <img 
+                  src="/images/boxes/career.png" 
+                  alt="Career" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-2 left-2 box-number">02</div>
+                <div className="absolute bottom-2 left-2 box-label">career</div>
+              </div>
+              
+              {/* Email box */}
+              <div className="relative max-w-md email-box">
+                <img 
+                  src="/images/boxes/email.png" 
+                  alt="Email" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-2 left-2 box-number">03</div>
+                <div className="absolute bottom-2 left-2 box-label">email</div>
+              </div>
+              
+              {/* Projects box */}
+              <div className="relative max-w-md projects-box">
+                <img 
+                  src="/images/boxes/projects.png" 
+                  alt="Projects" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-2 left-2 box-number">04</div>
+                <div className="absolute bottom-2 left-2 box-label">projects</div>
+              </div>
+            </div>
+            </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            {/* Name in center */}
+            <h2 className="text-9xl font-light my-name" style={{fontFamily: 'SnackerComic, sans-serif'}}>Rashaun Jamal Williams</h2>
+            
+            {/* Last 3 boxes below name - horizontal scrollable */}
+            <div className="w-full overflow-x-auto">
+              <div className="flex flex-row gap-8 justify-start min-w-max px-4">
+              {/* LinkedIn box */}
+              <a href="https://www.linkedin.com/in/rashaunwilliams" target="_blank" rel="noopener noreferrer" className="relative max-w-md linkedin-box block cursor-pointer hover:opacity-80 transition-opacity">
+                <img 
+                  src="/images/boxes/linkedin.png" 
+                  alt="LinkedIn" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-2 left-2 box-number">05</div>
+                <div className="absolute bottom-2 left-2 box-label">LinkedIn</div>
+              </a>
+              
+              {/* Phone box */}
+              <div className="relative max-w-md phone-box">
+                <img 
+                  src="/images/boxes/phone.png" 
+                  alt="Phone" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-2 left-2 phone-number">06</div>
+                <div className="absolute bottom-2 left-2 phone-label">phone</div>
+              </div>
+              
+              {/* Github box */}
+              <a href="https://github.com/Rashaunjw" target="_blank" rel="noopener noreferrer" className="relative max-w-md github-box block cursor-pointer hover:opacity-80 transition-opacity">
+                <img 
+                  src="/images/boxes/github.png" 
+                  alt="Github" 
+                  className="w-full h-auto"
+                />
+                <div className="absolute top-2 left-2 github-number">07</div>
+                <div className="absolute bottom-2 left-2 github-label">Github</div>
+              </a>
+            </div>
+          </div>
+    </div>
     </div>
   );
 }

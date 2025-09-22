@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'SnackerComic';
+  src: url('/fonts/SnackerComic_PerosnalUseOnly.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
+  --background: #F4E9E1;
   --foreground: #171717;
 }
 
@@ -23,4 +31,142 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom classes for bio box text */
+.box-number {
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  font-size: 32; /* text-lg equivalent */
+  color: #ffffff;
+  left: 20px;
+}
+
+.box-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  font-size: 64; /* text-lg equivalent */
+  color: #ffffff;
+  left: 20px;
+}
+.github-number {
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  font-size: 32; /* text-lg equivalent */
+  color: #000000;
+  left: 20px;
+}
+
+.github-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  font-size: 64; /* text-lg equivalent */
+  color: #000000;
+  left: 20px;
+}
+.phone-number {
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  font-size: 32; /* text-lg equivalent */
+  color: #000000;
+  left: 20px;
+}
+
+.phone-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: normal;
+  font-size: 64; /* text-lg equivalent */
+  color: #000000;
+  left: 20px;
+}
+
+.bio-box {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.bio-box:hover {
+  background-color: #F4E9E1;
+  border: 2px solid #000000;
+}
+
+.bio-box:hover img {
+  opacity: 0.1;
+}
+.career-box {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.career-box:hover {
+  background-color: #F4E9E1;
+  border: 2px solid #000000;
+}
+
+.career-box:hover img {
+  opacity: 0.1;
+}
+
+.email-box {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.email-box:hover {
+  background-color: #F4E9E1;
+  border: 2px solid #000000;
+}
+
+.email-box:hover img {
+  opacity: 0.1;
+}
+
+
+.my-name {
+  top: -40px;
+  left: -620px;
+}
+
+.box {
+  position: relative;
+  width: 8rem; /* w-32 equivalent */
+  height: 8rem; /* h-32 equivalent */
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.box:hover {
+  background-color: #F4E9E1; /* Same as page background */
+  border: 2px solid #000000; /* Black border */
+}
+
+.box:hover img {
+  opacity: 0.1; /* Make image very faint on hover */
+}
+
+.box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+/* Add hover effects for all other box classes */
+.projects-box, .linkedin-box, .phone-box, .github-box {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.projects-box:hover, .linkedin-box:hover, .phone-box:hover, .github-box:hover {
+  background-color: #F4E9E1;
+  border: 2px solid #000000;
+}
+
+.projects-box:hover img, .linkedin-box:hover img, .phone-box:hover img, .github-box:hover img {
+  opacity: 0.1;
+}
+
+/* Ensure all box images have transition */
+.bio-box img, .career-box img, .email-box img, .projects-box img, .linkedin-box img, .phone-box img, .github-box img {
+  transition: opacity 0.3s ease;
 }
