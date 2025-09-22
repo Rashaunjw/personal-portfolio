@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function CareerPage() {
+export default function ProjectsPage() {
   const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
@@ -15,20 +15,22 @@ export default function CareerPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F4E9E1] font-gucina">
+    <div className="min-h-screen bg-[#5900CC]">
       {/* Header with animated text */}
       <div className={`transition-all duration-1000 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-        <h1 className="text-6xl font-bold text-center pt-8 pb-4">CAREER</h1>
-      </div>
+        <h2 className="text-6xl font-semi-bold text-center text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          career
+        </h2>      
+        </div>
 
 
       {/* Back button */}
       <div className="fixed bottom-8 left-8">
         <Link 
           href="/"
-          className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors"
+          className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors font-gucina"
         >
-          ← Back to Home
+          RJW
         </Link>
       </div>
     </div>

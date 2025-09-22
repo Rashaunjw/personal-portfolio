@@ -8,13 +8,14 @@ import React, {
   forwardRef,
 } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 /**
  * Continuous horizontal scrolling like Lorenzo Dal Dosso website.
  * Smooth, seamless infinite scroll with duplicated content for seamless looping.
  */
   const BoxRow = forwardRef(function BoxRow(
-    { items, directionMultiplier = 1, gapPx = 32, initialOffsetMultiplier = 50 },
+    { items, directionMultiplier = 1, gapPx = 32, initialOffsetMultiplier = 1 },
     ref
   ) {
   const trackRef = useRef(null);
@@ -47,18 +48,18 @@ import Link from 'next/link';
     return itemsWithSeparators;
   };
 
-  // Set initial position to show boxes on both sides (only on refresh/first load)
+  // Set initial position to show boxes in consistent position every time
   useEffect(() => {
     if (itemWidth && items.length > 0 && !isInitialized) {
       const itemsWithSeparators = createItemsWithSeparators(items);
       const setWidth = itemWidth * itemsWithSeparators.length;
       
-      // Always use default initial position (no localStorage restoration)
-      const initialOffset = setWidth * initialOffsetMultiplier;
+      // Always start at the same position - center the first set of boxes
+      const initialOffset = setWidth; // Start exactly one set width to the left
       setTranslate(-initialOffset);
       setIsInitialized(true);
     }
-  }, [itemWidth, items.length, isInitialized, initialOffsetMultiplier]);
+  }, [itemWidth, items, isInitialized]);
 
   // Measure item width including gap
   useEffect(() => {
@@ -147,7 +148,7 @@ import Link from 'next/link';
         animationId = null;
       }
     };
-  }, [scrollSpeed, targetSpeed, directionMultiplier, itemWidth, items.length]);
+  }, [scrollSpeed, targetSpeed, directionMultiplier, itemWidth, items]);
 
   // FOR LOOP: Process all carousel items when user swipes
   const processCarouselItems = () => {

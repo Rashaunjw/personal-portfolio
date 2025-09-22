@@ -110,7 +110,7 @@ body {
 }
 
 .bio-box:hover {
-  background-color: #F4E9E1;
+  background-color: #E8F4FD;
   border: 2px solid #000000;
   border-radius: 19px;
 }
@@ -128,7 +128,7 @@ body {
 }
 
 .career-box:hover {
-  background-color: #F4E9E1;
+  background-color: #F0F8E8;
   border: 2px solid #000000;
   border-radius: 19px;
 }
@@ -142,13 +142,13 @@ body {
   opacity: 0;
 }
 
-.email-box {
+/* .email-box {
   transition: all 0.3s ease;
   border: 2px solid transparent;
-}
+} */
 
 .email-box:hover {
-  background-color: #F4E9E1;
+  background-color: #FFF8E1;
   border: 2px solid #000000;
   border-radius: 19px;
 }
@@ -196,8 +196,26 @@ body {
   border: 2px solid transparent;
 }
 
-.projects-box:hover, .linkedin-box:hover, .phone-box:hover, .github-box:hover {
-  background-color: #F4E9E1;
+.projects-box:hover {
+  background-color: #F3E5F5;
+  border: 2px solid #000000;
+  border-radius: 19px;
+}
+
+.linkedin-box:hover {
+  background-color: #E3F2FD;
+  border: 2px solid #000000;
+  border-radius: 19px;
+}
+
+.phone-box:hover {
+  background-color: #E8F5E8;
+  border: 2px solid #000000;
+  border-radius: 19px;
+}
+
+.github-box:hover {
+  background-color: #F5F5F5;
   border: 2px solid #000000;
   border-radius: 19px;
 }

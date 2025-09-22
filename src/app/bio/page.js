@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-export default function BioPage() {
+export default function ProjectsPage() {
   const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
@@ -15,18 +15,20 @@ export default function BioPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F4E9E1] font-gucina">
+    <div className="min-h-screen bg-[#FF3D00]">
       {/* Header with animated text */}
       <div className={`transition-all duration-1000 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-        <h1 className="text-6xl font-bold text-center pt-8 pb-4">BIO</h1>
-      </div>
+        <h2 className="text-6xl font-semi-bold text-center text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          bio
+        </h2>      
+        </div>
 
 
       {/* Back button */}
-      <div className="fixed bottom-8 left-18">
+      <div className="fixed bottom-8 left-8">
         <Link 
           href="/"
-          className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors"
+          className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors font-gucina"
         >
           RJW
         </Link>
