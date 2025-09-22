@@ -1,9 +1,33 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'SnackerComic';
-  src: url('/fonts/SnackerComic_PerosnalUseOnly.ttf') format('truetype');
+  font-family: 'Gucina';
+  src: url('/fonts/Gucina-Regular.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gucina';
+  src: url('/fonts/Gucina-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gucina';
+  src: url('/fonts/Gucina-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gucina';
+  src: url('/fonts/Gucina-Bold.ttf') format('truetype');
+  font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
@@ -31,11 +55,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden; /* Prevent page scrolling */
 }
 
 /* Custom classes for bio box text */
 .box-number {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gucina', sans-serif;
   font-weight: normal;
   font-size: 32; /* text-lg equivalent */
   color: #ffffff;
@@ -43,14 +68,14 @@ body {
 }
 
 .box-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gucina', sans-serif;
   font-weight: normal;
   font-size: 64; /* text-lg equivalent */
   color: #ffffff;
   left: 20px;
 }
 .github-number {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gucina', sans-serif;
   font-weight: normal;
   font-size: 32; /* text-lg equivalent */
   color: #000000;
@@ -58,14 +83,14 @@ body {
 }
 
 .github-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gucina', sans-serif;
   font-weight: normal;
   font-size: 64; /* text-lg equivalent */
   color: #000000;
   left: 20px;
 }
 .phone-number {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gucina', sans-serif;
   font-weight: normal;
   font-size: 32; /* text-lg equivalent */
   color: #000000;
@@ -73,7 +98,7 @@ body {
 }
 
 .phone-label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gucina', sans-serif;
   font-weight: normal;
   font-size: 64; /* text-lg equivalent */
   color: #000000;
@@ -81,30 +106,40 @@ body {
 }
 
 .bio-box {
-  transition: all 0.3s ease;
   border: 2px solid transparent;
 }
 
 .bio-box:hover {
   background-color: #F4E9E1;
   border: 2px solid #000000;
+  border-radius: 19px;
+}
+
+.bio-box:hover .box-number,
+.bio-box:hover .box-label {
+  color: #000000;
 }
 
 .bio-box:hover img {
-  opacity: 0.1;
+  opacity: 0;
 }
 .career-box {
-  transition: all 0.3s ease;
   border: 2px solid transparent;
 }
 
 .career-box:hover {
   background-color: #F4E9E1;
   border: 2px solid #000000;
+  border-radius: 19px;
+}
+
+.career-box:hover .box-number,
+.career-box:hover .box-label {
+  color: #000000;
 }
 
 .career-box:hover img {
-  opacity: 0.1;
+  opacity: 0;
 }
 
 .email-box {
@@ -115,10 +150,16 @@ body {
 .email-box:hover {
   background-color: #F4E9E1;
   border: 2px solid #000000;
+  border-radius: 19px;
+}
+
+.email-box:hover .box-number,
+.email-box:hover .box-label {
+  color: #000000;
 }
 
 .email-box:hover img {
-  opacity: 0.1;
+  opacity: 0;
 }
 
 
@@ -148,25 +189,149 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.3s ease;
 }
 
 /* Add hover effects for all other box classes */
 .projects-box, .linkedin-box, .phone-box, .github-box {
-  transition: all 0.3s ease;
   border: 2px solid transparent;
 }
 
 .projects-box:hover, .linkedin-box:hover, .phone-box:hover, .github-box:hover {
   background-color: #F4E9E1;
   border: 2px solid #000000;
+  border-radius: 19px;
+}
+
+
+.projects-box:hover .box-number,
+.projects-box:hover .box-label,
+.linkedin-box:hover .box-number,
+.linkedin-box:hover .box-label,
+.phone-box:hover .phone-number,
+.phone-box:hover .phone-label,
+.github-box:hover .github-number,
+.github-box:hover .github-label {
+  color: #000000;
+  transition: all 0.8s ease;
 }
 
 .projects-box:hover img, .linkedin-box:hover img, .phone-box:hover img, .github-box:hover img {
-  opacity: 0.1;
+  opacity: 0;
 }
 
-/* Ensure all box images have transition */
-.bio-box img, .career-box img, .email-box img, .projects-box img, .linkedin-box img, .phone-box img, .github-box img {
-  transition: opacity 0.3s ease;
+/* Small black separator styling */
+.separator {
+  width: 1rem; /* w-4 */
+  height: 1rem; /* h-4 */
+  background-color: #000000;
+  border-radius: 2px;
+  align-self: center; /* Centers vertically within flex container */
 }
+
+/* Hide scrollbars */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* Continuous scrolling animations for single sets */
+@keyframes scroll-left-continuous {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scroll-right-continuous {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-scroll-left-continuous {
+  animation: scroll-left-continuous 20s linear infinite;
+}
+
+.animate-scroll-right-continuous {
+  animation: scroll-right-continuous 20s linear infinite;
+}
+
+/* Box opening animation for page transitions */
+@keyframes boxOpen {
+  0% {
+    transform: scale(1);
+    border-radius: 0.5rem;
+  }
+  50% {
+    transform: scale(1.1);
+    border-radius: 1rem;
+  }
+  100% {
+    transform: scale(20);
+    border-radius: 50%;
+    opacity: 0;
+  }
+}
+
+.box-opening {
+  animation: boxOpen 0.8s ease-in-out forwards;
+}
+
+/* Text moving to top animation */
+@keyframes textToTop {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+.text-moving {
+  animation: textToTop 0.6s ease-in-out forwards;
+}
+
+/* Box hover effects - background changes to page color with black border */
+.bio-box:hover,
+.career-box:hover,
+.email-box:hover,
+.projects-box:hover,
+.phone-box:hover,
+.github-box:hover,
+.linkedin-box:hover {
+  background-color: #F4E9E1;
+  border: 2px solid black;
+}
+
+.bio-box:hover img,
+.career-box:hover img,
+.email-box:hover img,
+.projects-box:hover img,
+.phone-box:hover img,
+.github-box:hover img,
+.linkedin-box:hover img {
+  opacity: 0;
+}
+
+.bio-box:hover .box-label,
+.career-box:hover .box-label,
+.email-box:hover .box-label,
+.projects-box:hover .box-label,
+.phone-box:hover .phone-label,
+.github-box:hover .github-label,
+.linkedin-box:hover .box-label {
+  color: black;
+}
+
+

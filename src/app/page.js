@@ -1,103 +1,425 @@
+'use client';
+// Version 2.0 - Lorenzo Dal Dosso style continuous scrolling
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
+import Link from 'next/link';
+
+/**
+ * Continuous horizontal scrolling like Lorenzo Dal Dosso website.
+ * Smooth, seamless infinite scroll with duplicated content for seamless looping.
+ */
+  const BoxRow = forwardRef(function BoxRow(
+    { items, directionMultiplier = 1, gapPx = 32, initialOffsetMultiplier = 50 },
+    ref
+  ) {
+  const trackRef = useRef(null);
+  const animationRef = useRef(null);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [scrollSpeed, setScrollSpeed] = useState(0);
+  const [targetSpeed, setTargetSpeed] = useState(0);
+  const [translate, setTranslate] = useState(0);
+  const [itemWidth, setItemWidth] = useState(0);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Helper function to create items with separators using FOR LOOP
+  const createItemsWithSeparators = (items) => {
+    const itemsWithSeparators = [];
+    
+    // FOR LOOP: Process each box and add separator
+    for (let i = 0; i < items.length; i++) {
+      // Add the box
+      itemsWithSeparators.push(items[i]);
+      
+      // Add separator after each box (including between 7 and 1)
+      itemsWithSeparators.push({
+        key: `separator-${i}`,
+        content: (
+          <div className="separator w-2 h-16 bg-black flex-shrink-0"></div>
+        ),
+      });
+    }
+    
+    return itemsWithSeparators;
+  };
+
+  // Set initial position to show boxes on both sides (only on refresh/first load)
+  useEffect(() => {
+    if (itemWidth && items.length > 0 && !isInitialized) {
+      const itemsWithSeparators = createItemsWithSeparators(items);
+      const setWidth = itemWidth * itemsWithSeparators.length;
+      
+      // Always use default initial position (no localStorage restoration)
+      const initialOffset = setWidth * initialOffsetMultiplier;
+      setTranslate(-initialOffset);
+      setIsInitialized(true);
+    }
+  }, [itemWidth, items.length, isInitialized, initialOffsetMultiplier]);
+
+  // Measure item width including gap
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    const measure = () => {
+      const cards = el.querySelectorAll('.box-item');
+      if (cards.length > 0) {
+        // Measure the actual width including gap
+        const cardWidth = cards[0].offsetWidth;
+        const totalWidth = cardWidth + gapPx;
+        console.log('Box width:', cardWidth, 'Gap:', gapPx, 'Total width:', totalWidth);
+        setItemWidth(totalWidth);
+      }
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    window.addEventListener('resize', measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [gapPx]);
+
+  // Smooth animation loop with deceleration
+  useEffect(() => {
+    if (!itemWidth) return;
+
+    let animationId = null;
+
+    const animate = () => {
+      // Safety check - prevent infinite loops
+      if (!itemWidth) {
+        if (animationId) {
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        }
+        return;
+      }
+      
+      // Smooth deceleration: gradually reduce speed towards target
+      setScrollSpeed(prevSpeed => {
+        const deceleration = 0.92; // How fast it slows down (0.92 = 8% reduction per frame)
+        const newSpeed = prevSpeed * deceleration + targetSpeed * (1 - deceleration);
+        
+        // Stop when speed is very close to target
+        if (Math.abs(newSpeed - targetSpeed) < 0.1) {
+          return targetSpeed;
+        }
+        
+        return newSpeed;
+      });
+      
+      setTranslate(prev => {
+        // FOR LOOP: Process all boxes and separators
+        const itemsWithSeparators = createItemsWithSeparators(items);
+        const setWidth = itemWidth * itemsWithSeparators.length;
+        
+        // Calculate new position with current speed
+        let newTranslate = prev - (scrollSpeed * directionMultiplier * 0.3);
+        
+        // SEAMLESS RESET: When we scroll past 2 complete sets, reset to maintain infinite loop
+        if (Math.abs(newTranslate) >= setWidth * 2) {
+          // Reset to the same position in the next set for seamless carousel
+          newTranslate = newTranslate - (setWidth * Math.sign(newTranslate));
+          console.log('Reset triggered:', { newTranslate, setWidth, directionMultiplier });
+        }
+        
+        return newTranslate;
+      });
+      
+      // Continue animation loop smoothly
+      animationId = requestAnimationFrame(animate);
+    };
+
+    // Start the animation loop
+    animationId = requestAnimationFrame(animate);
+    
+    // Cleanup function to prevent memory leaks
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+    };
+  }, [scrollSpeed, targetSpeed, directionMultiplier, itemWidth, items.length]);
+
+  // FOR LOOP: Process all carousel items when user swipes
+  const processCarouselItems = () => {
+    const itemsWithSeparators = createItemsWithSeparators(items);
+    const processedItems = [];
+    
+    // FOR LOOP: Go through each item and separator
+    for (let i = 0; i < itemsWithSeparators.length; i++) {
+      const item = itemsWithSeparators[i];
+      
+      // Process each item (box or separator)
+      if (item.key && item.key.startsWith('separator-')) {
+        // This is a separator
+        processedItems.push({
+          ...item,
+          processed: true,
+          type: 'separator'
+        });
+      } else {
+        // This is a box
+        processedItems.push({
+          ...item,
+          processed: true,
+          type: 'box'
+        });
+      }
+    }
+    
+    return processedItems;
+  };
+
+  // Imperative control - Infinite carousel scrolling with FOR/WHILE loops
+  useImperativeHandle(ref, () => ({
+    startScroll(direction) {
+      if (isScrolling) return;
+      
+      // FOR LOOP: Process all items when starting scroll
+      const processedItems = processCarouselItems();
+      console.log(`Processing ${processedItems.length} items (${processedItems.filter(item => item.type === 'box').length} boxes, ${processedItems.filter(item => item.type === 'separator').length} separators)`);
+      
+      setIsScrolling(true);
+      setTargetSpeed(direction * 60); // Set target speed for slower movement
+    },
+    stopScroll() {
+      setIsScrolling(false);
+      setTargetSpeed(0); // Gradually decelerate to 0
+    },
+    // Auto-scroll methods removed - user-controlled only
+  }));
+
+  // Create infinite loop with 5 copies for truly seamless appearance
+  const itemsWithSeparators = createItemsWithSeparators(items);
+  // Use for loop to create multiple copies for seamless infinite appearance
+  const duplicatedItems = [];
+  const numberOfCopies = 100; // Adjust this number to control how many copies
+  
+  for (let i = 0; i < numberOfCopies; i++) {
+    duplicatedItems.push(...itemsWithSeparators);
+  }
+
+  return (
+    <div className="w-full overflow-hidden">
+      <div
+        ref={trackRef}
+        className="flex flex-row items-center"
+        style={{
+          transform: `translate3d(${translate}px, 0, 0)`,
+          gap: `${gapPx}px`,
+          willChange: 'transform',
+        }}
+      >
+        {duplicatedItems.map((node, i) => (
+          <div key={`${node.key}-${i}`} className="box-item flex-shrink-0">
+            {node.content}
+          </div>
+        ))}
+      </div>
+        </div>
+  );
+});
+
 export default function Home() {
+  // Build your 7 boxes with navigation and animations
+  const allBoxes = [
+    {
+      key: 'bio',
+      content: (
+        <Link href="/bio" className="relative max-w-md bio-box block">
+          <img src="/images/boxes/bio.png" alt="Bio" className="w-full h-auto" />
+          <div className="absolute top-2 left-2 box-number">01</div>
+          <div className="absolute bottom-2 left-2 box-label">bio</div>
+        </Link>
+      ),
+    },
+    {
+      key: 'career',
+      content: (
+        <Link href="/career" className="relative max-w-md career-box block">
+          <img src="/images/boxes/career.png" alt="Career" className="w-full h-auto" />
+          <div className="absolute top-2 left-2 box-number">02</div>
+          <div className="absolute bottom-2 left-2 box-label">career</div>
+        </Link>
+      ),
+    },
+    {
+      key: 'email',
+      content: (
+        <Link href="/email" className="relative max-w-md email-box block">
+          <img src="/images/boxes/email.png" alt="Email" className="w-full h-auto" />
+          <div className="absolute top-2 left-2 box-number">03</div>
+          <div className="absolute bottom-2 left-2 box-label">email</div>
+        </Link>
+      ),
+    },
+    {
+      key: 'projects',
+      content: (
+        <Link href="/projects" className="relative max-w-md projects-box block">
+          <img src="/images/boxes/projects.png" alt="Projects" className="w-full h-auto" />
+          <div className="absolute top-2 left-2 box-number">04</div>
+          <div className="absolute bottom-2 left-2 box-label">projects</div>
+        </Link>
+      ),
+    },
+    {
+      key: 'linkedin',
+      content: (
+        <a
+          href="https://www.linkedin.com/in/rashaunwilliams"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative max-w-md linkedin-box block"
+        >
+          <img src="/images/boxes/linkedin.png" alt="LinkedIn" className="w-full h-auto" />
+          <div className="absolute top-2 left-2 box-number">05</div>
+          <div className="absolute bottom-2 left-2 box-label">LinkedIn</div>
+        </a>
+      ),
+    },
+    {
+      key: 'phone',
+      content: (
+        <Link href="/phone" className="relative max-w-md phone-box block">
+          <img src="/images/boxes/phone.png" alt="Phone" className="w-full h-auto" />
+          <div className="absolute top-2 left-2 phone-number">06</div>
+          <div className="absolute bottom-2 left-2 phone-label">phone</div>
+        </Link>
+      ),
+    },
+    {
+      key: 'github',
+      content: (
+        <a
+          href="https://github.com/Rashaunjw"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative max-w-md github-box block"
+        >
+          <img src="/images/boxes/github.png" alt="Github" className="w-full h-auto" />
+          <div className="absolute top-2 left-2 github-number">07</div>
+          <div className="absolute bottom-2 left-2 github-label">Github</div>
+        </a>
+      ),
+    },
+  ];
+
+  // Create offset arrays to ensure top and bottom never show same boxes
+  const topBoxes = allBoxes;
+  const bottomBoxes = [...allBoxes.slice(3), ...allBoxes.slice(0, 3)]; // Offset by 3 positions for better separation
+
+  // Refs to control each row
+  const topRowRef = useRef(null);
+  const bottomRowRef = useRef(null);
+
+  // Auto-scroll removed - user-controlled only
+
+  // Global wheel/touch → continuous scrolling like Lorenzo Dal Dosso
+  useEffect(() => {
+    let startY = 0;
+    let startX = 0;
+    let dy = 0;
+    let isScrolling = false;
+
+    const startScroll = (dir) => {
+      if (isScrolling) return;
+      isScrolling = true;
+      
+      // dir: +1 (user swipes up / scrolls down) → both rows scroll left
+      // dir: -1 (user swipes down / scrolls up) → both rows scroll right
+      topRowRef.current?.startScroll(dir);         // top: directionMultiplier=+1 → left on +1
+      bottomRowRef.current?.startScroll(dir);      // bottom: directionMultiplier=-1 → right on +1 (opposite of top)
+    };
+
+    const stopScroll = () => {
+      if (!isScrolling) return;
+      isScrolling = false;
+      topRowRef.current?.stopScroll();
+      bottomRowRef.current?.stopScroll();
+    };
+
+    const onWheel = (e) => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      e.preventDefault();
+      
+      const direction = e.deltaY > 0 ? +1 : -1; // scroll down = +1
+      startScroll(direction);
+      
+      // Stop scrolling after a delay
+      setTimeout(stopScroll, 500);
+    };
+
+    const onTouchStart = (e) => {
+      startY = e.touches[0].clientY;
+      startX = e.touches[0].clientX;
+      dy = 0;
+    };
+    
+    const onTouchMove = (e) => {
+      const y = e.touches[0].clientY;
+      const x = e.touches[0].clientX;
+      const dY = startY - y;
+      const dX = startX - x;
+      if (Math.abs(dY) > Math.abs(dX)) {
+        dy = dY;
+      }
+    };
+    
+    const onTouchEnd = () => {
+      const THRESH = 30;
+      if (Math.abs(dy) > THRESH) {
+        const direction = dy > 0 ? +1 : -1; // swipe up = +1
+        startScroll(direction);
+        
+        // Stop scrolling after a delay
+        setTimeout(stopScroll, 500);
+      }
+    };
+
+    document.addEventListener('wheel', onWheel, { passive: false });
+    document.addEventListener('touchstart', onTouchStart, { passive: true });
+    document.addEventListener('touchmove', onTouchMove, { passive: true });
+    document.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      document.removeEventListener('wheel', onWheel);
+      document.removeEventListener('touchstart', onTouchStart);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen relative">
-      {/* Initials in top left corner */}
+      {/* Initials in top left corner (kept) */}
       <div className="absolute top-8 left-8">
-        <h1 className="text-5xl font-bold" style={{fontFamily: 'SnackerComic, sans-serif'}}>RJW</h1>
+        <h1 className="text-5xl font-medium" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          RJW
+        </h1>
       </div>
-      
-        {/* Full name in center */}
-          <div className="flex flex-col items-center justify-center min-h-screen gap-8">
-            {/* First 4 boxes above name - horizontal scrollable */}
-            <div className="w-full overflow-x-auto">
-              <div className="flex flex-row gap-8 justify-start min-w-max px-4">
-              {/* Bio box */}
-              <div className="relative max-w-md bio-box">
-                <img 
-                  src="/images/boxes/bio.png" 
-                  alt="Bio" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-2 left-2 box-number">01</div>
-                <div className="absolute bottom-2 left-2 box-label">bio</div>
-              </div>
-              
-              {/* Career box */}
-              <div className="relative max-w-md career-box">
-                <img 
-                  src="/images/boxes/career.png" 
-                  alt="Career" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-2 left-2 box-number">02</div>
-                <div className="absolute bottom-2 left-2 box-label">career</div>
-              </div>
-              
-              {/* Email box */}
-              <div className="relative max-w-md email-box">
-                <img 
-                  src="/images/boxes/email.png" 
-                  alt="Email" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-2 left-2 box-number">03</div>
-                <div className="absolute bottom-2 left-2 box-label">email</div>
-              </div>
-              
-              {/* Projects box */}
-              <div className="relative max-w-md projects-box">
-                <img 
-                  src="/images/boxes/projects.png" 
-                  alt="Projects" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-2 left-2 box-number">04</div>
-                <div className="absolute bottom-2 left-2 box-label">projects</div>
-              </div>
-            </div>
-            </div>
 
-            {/* Name in center */}
-            <h2 className="text-9xl font-light my-name" style={{fontFamily: 'SnackerComic, sans-serif'}}>Rashaun Jamal Williams</h2>
-            
-            {/* Last 3 boxes below name - horizontal scrollable */}
-            <div className="w-full overflow-x-auto">
-              <div className="flex flex-row gap-8 justify-start min-w-max px-4">
-              {/* LinkedIn box */}
-              <a href="https://www.linkedin.com/in/rashaunwilliams" target="_blank" rel="noopener noreferrer" className="relative max-w-md linkedin-box block cursor-pointer hover:opacity-80 transition-opacity">
-                <img 
-                  src="/images/boxes/linkedin.png" 
-                  alt="LinkedIn" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-2 left-2 box-number">05</div>
-                <div className="absolute bottom-2 left-2 box-label">LinkedIn</div>
-              </a>
-              
-              {/* Phone box */}
-              <div className="relative max-w-md phone-box">
-                <img 
-                  src="/images/boxes/phone.png" 
-                  alt="Phone" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-2 left-2 phone-number">06</div>
-                <div className="absolute bottom-2 left-2 phone-label">phone</div>
-              </div>
-              
-              {/* Github box */}
-              <a href="https://github.com/Rashaunjw" target="_blank" rel="noopener noreferrer" className="relative max-w-md github-box block cursor-pointer hover:opacity-80 transition-opacity">
-                <img 
-                  src="/images/boxes/github.png" 
-                  alt="Github" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-2 left-2 github-number">07</div>
-                <div className="absolute bottom-2 left-2 github-label">Github</div>
-              </a>
-            </div>
-          </div>
-    </div>
+      <div className="flex flex-col items-center justify-center min-h-screen gap-8">
+        {/* TOP: positive steps = LEFT */}
+        <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
+
+        {/* NAME IN CENTER (kept) */}
+        <h2 className="text-[10rem] font-semi-bold my-name" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          Rashaun J Williams
+        </h2>
+
+        {/* BOTTOM: positive steps = RIGHT */}
+        <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} />
+      </div>
     </div>
   );
 }
