@@ -21,33 +21,6 @@ export default function BioPage() {
         <h1 className="text-6xl font-bold text-center pt-8 pb-4">BIO</h1>
       </div>
 
-      {/* Content */}
-      <div className={`transition-all duration-1000 delay-500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-        <div className="max-w-4xl mx-auto px-8 py-12">
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
-            <h2 className="text-3xl font-semibold mb-6">About Rashaun Jamal Williams</h2>
-            <p className="text-lg leading-relaxed mb-6">
-              I am a passionate developer and designer with a love for creating beautiful, 
-              functional web experiences. My journey in technology began with curiosity 
-              and has evolved into a deep understanding of modern web development practices.
-            </p>
-            <p className="text-lg leading-relaxed mb-6">
-              I specialize in React, Next.js, and modern JavaScript frameworks, with a 
-              keen eye for design and user experience. When I'm not coding, you can find 
-              me exploring new technologies, contributing to open source projects, or 
-              sharing knowledge with the developer community.
-            </p>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <span className="bg-[#F4E9E1] px-4 py-2 rounded-full text-sm font-medium">React</span>
-              <span className="bg-[#F4E9E1] px-4 py-2 rounded-full text-sm font-medium">Next.js</span>
-              <span className="bg-[#F4E9E1] px-4 py-2 rounded-full text-sm font-medium">JavaScript</span>
-              <span className="bg-[#F4E9E1] px-4 py-2 rounded-full text-sm font-medium">TypeScript</span>
-              <span className="bg-[#F4E9E1] px-4 py-2 rounded-full text-sm font-medium">CSS</span>
-              <span className="bg-[#F4E9E1] px-4 py-2 rounded-full text-sm font-medium">Design</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Back button */}
       <div className="fixed bottom-8 left-18">
