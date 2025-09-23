@@ -249,15 +249,19 @@ export default function Home() {
     const shouldContinueSqueeze = sessionStorage.getItem('shouldContinueSqueeze');
     if (shouldContinueSqueeze === 'true') {
       sessionStorage.removeItem('shouldContinueSqueeze');
-      setIsContinuingSqueeze(true);
       
-      // After animation completes, show content
+      // Add a small delay to ensure sub-page animation is complete
       setTimeout(() => {
-        setIsContinuingSqueeze(false);
-        setIsContentVisible(true);
-        setLineExpanded(true);
-        setContentRevealed(true);
-      }, 1500); // 1.5 seconds for the continue animation
+        setIsContinuingSqueeze(true);
+        
+        // After animation completes, show content
+        setTimeout(() => {
+          setIsContinuingSqueeze(false);
+          setIsContentVisible(true);
+          setLineExpanded(true);
+          setContentRevealed(true);
+        }, 3000); // 3 seconds for the continue animation
+      }, 100); // Small delay to ensure smooth transition
     } else {
       // Start normal opening animation
       setIsOpening(true);
@@ -548,7 +552,7 @@ export default function Home() {
         {/* Initials in top left corner */}
         <div className="absolute top-8 left-8">
           <h1 
-            className="text-5xl font-medium cursor-pointer transition-transform" 
+            className="text-5xl font-medium transition-transform" 
             style={{ fontFamily: 'Gucina, sans-serif' }}
           >
             R J W

@@ -18,11 +18,11 @@ export default function CareerPage() {
   const handleSqueezeAnimation = () => {
     setIsSqueezing(true);
     
-    // Navigate at 50% of animation (when content disappears)
+    // Navigate immediately and let main page handle the full animation
     setTimeout(() => {
       sessionStorage.setItem('shouldContinueSqueeze', 'true');
       window.location.href = '/';
-    }, 1500); // 1.5 seconds = 50% of 3 second animation
+    }, 100); // Very short delay just to start the squeeze
   };
 
   return (
@@ -36,6 +36,54 @@ export default function CareerPage() {
         <div className="absolute top-18 left-40 text-3xl font-semi-bold text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
           02
         </div>
+        <div className="mt-6 pb-32">
+        <div className="text-left pl-25 pr-8">
+          <div className="text-3xl font-semi-bold text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          <br />
+          <br />
+          <div className="text-4xl font-bold text-white mb-1" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          Technical Experience: 
+          </div>
+          <br />
+          Junior Full-Stack Software Developer at <a href="https://www.relai.us/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-300 transition-colors">Relai</a> (Pittsburgh, PA), May 2024 - Present
+          <br />
+          <br />
+          <div className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          Technical Skills:
+          </div>
+          <br />
+          Data – Excel, Python, MongoDB, PostgreSQL, MySQL     
+          <br />   
+          Design/Frontend – Figma, JavaScript, TypeScript, React, React Native, Next.js, Tailwind, HTML, CSS, PHP, Ruby
+          <br />
+          Backend – Node, Go, Postman, Firebase, Stripe, Java, YAML, ROS 2, C
+          <br />
+          Management – Git, GitHub, Slack
+          <br />
+          Deployment/Testing – Xcode, Vercel, Apple Connect, Expo, JUnit, Rspec, Cucumber
+          <br />
+          <br />
+          <br />
+          <div className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          Education: 
+          </div>
+          <br />
+          University of the South (Sewanee, TN), May 2022 - May 2026
+          <br />
+          <br />
+          <br />
+
+          <div className="text-4xl font-bold text-white mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          Professional Experience:          
+          </div>
+          <br />
+          Member Services Representative at Crunch Fitness (Warner Robins, GA), June 2023 - August 2023
+          <br />
+          Team Member at Urban Air Trampoline Park (Warner Robins, GA), June 2023 - August 2023
+          </div>
+        </div>
+        </div>
+
 
 
       {/* Back button */}

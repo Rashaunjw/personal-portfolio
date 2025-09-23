@@ -18,11 +18,11 @@ export default function EmailPage() {
   const handleSqueezeAnimation = () => {
     setIsSqueezing(true);
     
-    // Navigate at 50% of animation (when content disappears)
+    // Navigate immediately and let main page handle the full animation
     setTimeout(() => {
       sessionStorage.setItem('shouldContinueSqueeze', 'true');
       window.location.href = '/';
-    }, 1500); // 1.5 seconds = 50% of 3 second animation
+    }, 100); // Very short delay just to start the squeeze
   };
 
   return (

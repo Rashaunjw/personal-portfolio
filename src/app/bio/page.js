@@ -18,11 +18,11 @@ export default function BioPage() {
   const handleSqueezeAnimation = () => {
     setIsSqueezing(true);
     
-    // Navigate at 50% of animation (when content disappears)
+    // Navigate immediately and let main page handle the full animation
     setTimeout(() => {
       sessionStorage.setItem('shouldContinueSqueeze', 'true');
       window.location.href = '/';
-    }, 1500); // 1.5 seconds = 50% of 3 second animation
+    }, 100); // Very short delay just to start the squeeze
   };
 
   return (
@@ -84,7 +84,7 @@ export default function BioPage() {
       </div>
 
       {/* Back button */}
-      <div className="fixed bottom-8 left-8">
+      <div className="fixed bottom-8 left-28">
         <button 
           onClick={handleSqueezeAnimation}
           className="bg-[#F4E9E1] text-black px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
