@@ -161,7 +161,10 @@ export default function CareerPage() {
              </ul>
            </div>
          </div>
-      </div>
+       </div>
+
+       {/* Bottom padding */}
+       <div className="pb-32"></div>
 
 
       {/* Clickable monogram */}

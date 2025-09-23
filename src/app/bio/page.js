@@ -29,13 +29,13 @@ export default function BioPage() {
     <div className={`min-h-screen bg-[#FF3D00] ${isSqueezing ? 'animate-page-squeeze' : ''}`}>
       {/* Header with animated text */}
       <div className={`transition-all duration-1000 pt-8 sm:pt-12 md:pt-16 relative ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semi-bold text-center text-white px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semi-bold text-center text-white px-4 mb-18" style={{ fontFamily: 'Gucina, sans-serif' }}>
           bio
         </h2>      
       </div>
       
       {/* About me section - moved down */}
-      <div className={`mt-6 sm:mt-8 flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 transition-all duration-1500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
+      <div className={`mt-6 sm:mt-8 flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 pb-32 transition-all duration-1500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
         <div className="flex-1 flex">
           <div className="bg-[#F4E9E1] rounded-lg p-6 border-l-4 border-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] w-full flex flex-col">
             <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-black mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>

@@ -476,14 +476,24 @@ export default function Home() {
     };
 
     const onWheel = (e) => {
-      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
-      e.preventDefault();
+      // Handle both vertical and horizontal wheel events
+      const absDeltaY = Math.abs(e.deltaY);
+      const absDeltaX = Math.abs(e.deltaX);
       
-      const direction = e.deltaY > 0 ? +1 : -1; // scroll down = +1
-      startScroll(direction);
-      
-      // Stop scrolling after a delay
-      setTimeout(stopScroll, 500);
+      // Only prevent default if there's significant movement
+      if (absDeltaY > absDeltaX) {
+        // Vertical scroll
+        e.preventDefault();
+        const direction = e.deltaY > 0 ? +1 : -1; // scroll down = +1
+        startScroll(direction);
+        setTimeout(stopScroll, 500);
+      } else if (absDeltaX > absDeltaY) {
+        // Horizontal scroll
+        e.preventDefault();
+        const direction = e.deltaX > 0 ? +1 : -1; // scroll right = +1
+        startScroll(direction);
+        setTimeout(stopScroll, 500);
+      }
     };
 
     const onTouchStart = (e) => {
@@ -585,7 +595,7 @@ export default function Home() {
           <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
 
           {/* NAME IN CENTER */}
-          <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4 my-8 sm:my-12 md:my-16" style={{ fontFamily: 'Gucina, sans-serif' }}>
             Rashaun J Williams
           </h2>
 
