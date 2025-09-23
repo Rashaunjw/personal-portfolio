@@ -1,5 +1,4 @@
 'use client';
-// Version 2.0 - Lorenzo Dal Dosso style continuous scrolling
 import React, {
   useRef,
   useEffect,
@@ -11,7 +10,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 /**
- * Continuous horizontal scrolling like Lorenzo Dal Dosso website.
  * Smooth, seamless infinite scroll with duplicated content for seamless looping.
  */
   const BoxRow = forwardRef(function BoxRow(
@@ -109,7 +107,7 @@ import Image from 'next/image';
         const newSpeed = prevSpeed * deceleration + targetSpeed * (1 - deceleration);
         
         // Stop when speed is very close to target
-        if (Math.abs(newSpeed - targetSpeed) < 0.1) {
+        if (Math.abs(newSpeed - targetSpeed) < 0.3) {
           return targetSpeed;
         }
         

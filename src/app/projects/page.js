@@ -8,21 +8,16 @@ export default function ProjectsPage() {
   const [isSqueezing, setIsSqueezing] = useState(false);
 
   useEffect(() => {
-    // Start animation on mount, then show content
-    const timer = setTimeout(() => {
-      setIsAnimating(false);
-    }, 100);
+    const timer = setTimeout(() => setIsAnimating(false), 100);
     return () => clearTimeout(timer);
   }, []);
 
   const handleSqueezeAnimation = () => {
     setIsSqueezing(true);
-    
-    // Navigate immediately and let main page handle the full animation
     setTimeout(() => {
       sessionStorage.setItem('shouldContinueSqueeze', 'true');
       window.location.href = '/';
-    }, 100); // Very short delay just to start the squeeze
+    }, 100);
   };
 
   return (
@@ -163,16 +158,16 @@ export default function ProjectsPage() {
           </div>
         </div>
         </div>
-
-         <div className="absolute top-8 left-8">
- <h1 
-   onClick={handleSqueezeAnimation}
-   className="text-5xl font-medium text-white transition-transform cursor-pointer hover:scale-110 hover:opacity-80" 
-   style={{ fontFamily: 'Gucina, sans-serif' }}
- >
-   R J W
- </h1>
- </div>
+      {/* Clickable monogram */}
+      <div className="absolute top-8 left-8">
+        <h1
+          onClick={handleSqueezeAnimation}
+          className="text-5xl font-medium text-white transition-transform cursor-pointer hover:scale-110 hover:opacity-80"
+          style={{ fontFamily: 'Gucina, sans-serif' }}
+        >
+          R J W
+        </h1>
+      </div>
     </div>
   );
 }

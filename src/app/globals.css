@@ -428,10 +428,10 @@ body {
     transform: scale(0.2, 0.002);
     opacity: 1;
   }
-  /* 50% {
+  50% {
     transform: scale(0.2, 0.002);
     opacity: 0;
-  } */
+  }
   85% {
     transform: scale(0, 0.000);
     opacity: 1;
@@ -476,6 +476,10 @@ body {
   }
   50% {
     transform: scale(1, 0.002);
+    opacity: 1;
+  }
+  85% {
+    transform: scale(0, 0.000);
     opacity: 1;
   }
   100% {
