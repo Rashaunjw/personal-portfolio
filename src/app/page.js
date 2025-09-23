@@ -595,7 +595,7 @@ export default function Home() {
           <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
 
           {/* NAME IN CENTER */}
-          <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4 my-8 sm:my-12 md:my-16" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
             Rashaun J Williams
           </h2>
 
