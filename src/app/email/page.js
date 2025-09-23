@@ -33,7 +33,7 @@ export default function EmailPage() {
           email
         </h2>      
         </div>    
-        <div className="flex justify-center items-center min-h-[80vh]">
+        <div className={`flex justify-center items-center min-h-[80vh] transition-all duration-1500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
         <h2 className="text-4xl font-semi-bold text-center text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
           rashaunjwilliams@gmail.com <br />
           <br />

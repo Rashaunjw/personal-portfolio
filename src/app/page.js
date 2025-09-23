@@ -351,6 +351,7 @@ export default function Home() {
           <img src="/images/boxes/bio.png" alt="Bio" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">01</div>
           <div className="absolute bottom-2 left-2 box-label">bio</div>
+          <div className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-2xl">👤</div>
         </Link>
       ),
     },
@@ -365,6 +366,7 @@ export default function Home() {
           <img src="/images/boxes/career.png" alt="Career" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">02</div>
           <div className="absolute bottom-2 left-2 box-label">career</div>
+          <div className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-2xl">💼</div>
         </Link>
       ),
     },
@@ -379,6 +381,7 @@ export default function Home() {
           <img src="/images/boxes/linkedin.png" alt="Email" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">03</div>
           <div className="absolute bottom-2 left-2 box-label">email</div>
+          <div className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-2xl">📧</div>
         </Link>
       ),
     },
@@ -393,6 +396,7 @@ export default function Home() {
           <img src="/images/boxes/email.png" alt="Projects" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">04</div>
           <div className="absolute bottom-2 left-2 box-label">projects</div>
+          <div className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-2xl">💻</div>
         </Link>
       ),
     },
@@ -427,6 +431,7 @@ export default function Home() {
           <img src="/images/boxes/phone.png" alt="Phone" className="w-full h-auto" />
           <div className="absolute top-2 left-2 phone-number">06</div>
           <div className="absolute bottom-2 left-2 phone-label">phone</div>
+          <div className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-2xl">📱</div>
         </Link>
       ),
     },

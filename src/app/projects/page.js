@@ -33,7 +33,7 @@ export default function ProjectsPage() {
           projects
         </h2>      
       </div>
-      <div className="mt-6 pb-32">
+      <div className={`mt-6 pb-32 transition-all duration-1500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
         <div className="text-left pl-25 pr-8">
           <div className="text-2xl font-regular text-white mb-6 text-center" style={{ fontFamily: 'Gucina, sans-serif' }}>
           A collection of personal and academic projects showcasing my journey in software development, from web applications to mobile apps and games.
