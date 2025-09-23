@@ -32,9 +32,6 @@ export default function BioPage() {
         <h2 className="text-6xl font-semi-bold text-center text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
           bio
         </h2>      
-        <div className="absolute top-18 left-40 text-3xl font-semi-bold text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
-          01
-        </div>
       </div>
       
       {/* About me section - moved down */}
@@ -43,7 +40,7 @@ export default function BioPage() {
           <div className="text-3xl font-semi-bold text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
           <br />
           <br />
-          My name is Rashaun Jamal Williams, an aspiring software engineer that enjoys full-stack web and mobile development. I grew up in Warner Robins, Georgia and currently reside in Tennessee where I am studying computer science and philosophy.
+          My name is Rashaun Jamal Williams, I&apos;m an aspiring software engineer that enjoys full-stack web and mobile development. I grew up in Warner Robins, Georgia and currently reside in Tennessee where I am studying computer science and philosophy.
           <br />
           <br />
           If I&apos;m not coding, I&apos;m reading, watching anime, or working out. My favorite extracurricular activities include snowboarding, playing basketball, and running. I love to travel, experience new places, learn new things, and watch tons of movies.
@@ -83,16 +80,16 @@ export default function BioPage() {
         </div>
       </div>
 
-      {/* Back button */}
-      <div className="fixed bottom-8 left-28">
-        <button 
-          onClick={handleSqueezeAnimation}
-          className="bg-[#F4E9E1] text-black px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
-          style={{ fontFamily: 'Gucina, sans-serif', fontSize: '1.5rem', fontWeight: '500' }}
-        >
-          R J W
-        </button>
-      </div>
+       <div className="absolute top-8 left-8">
+ <h1 
+   onClick={handleSqueezeAnimation}
+   className="text-5xl font-medium text-white transition-transform cursor-pointer hover:scale-110 hover:opacity-80" 
+   style={{ fontFamily: 'Gucina, sans-serif' }}
+ >
+   R J W
+ </h1>
+ </div>
     </div>
   );
 }
+

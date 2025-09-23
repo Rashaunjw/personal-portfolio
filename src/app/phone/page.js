@@ -32,28 +32,22 @@ export default function PhonePage() {
         <h2 className="text-6xl font-semi-bold text-center text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
           phone
         </h2>      
-        <div className="absolute top-18 left-40 text-3xl font-semi-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
-          06
         </div>
-      </div>
-      
-      {/* Phone number centered */}
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <h2 className="text-6xl font-semi-bold text-center text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
+        <div className="flex justify-center items-center min-h-[80vh]">
+        <h2 className="text-4xl font-semi-bold text-center text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
           478-538-0634
         </h2>     
-      </div>
+        </div>
 
 
-      {/* Back button */}
-      <div className="fixed bottom-8 left-28">
-        <button 
+      <div className="absolute top-8 left-8">
+        <h1 
           onClick={handleSqueezeAnimation}
-          className="bg-[#F4E9E1] text-black px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer"
-          style={{ fontFamily: 'Gucina, sans-serif', fontSize: '1.5rem', fontWeight: '500' }}
+          className="text-5xl font-medium text-black transition-transform cursor-pointer hover:scale-110 hover:opacity-80" 
+          style={{ fontFamily: 'Gucina, sans-serif' }}
         >
           R J W
-        </button>
+        </h1>
       </div>
     </div>
   );

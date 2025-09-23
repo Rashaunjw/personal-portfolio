@@ -280,8 +280,8 @@ export default function Home() {
     const colorMap = {
       '/bio': '#FF3D00',      // Original bio box color
       '/career': '#5900CC',   // Original career box color  
-      '/email': '#000000',    // Original email box color
-      '/projects': '#0036D8', // Original projects box color
+      '/email': '#FF0000',    // Original email box color
+      '/projects': '#000000', // Projects box color (red)
       '/phone': '#39FF14'     // Original phone box color
     };
     return colorMap[href] || '#F4E9E1';
@@ -376,7 +376,7 @@ export default function Home() {
           className="relative max-w-md email-box block"
           onClick={(e) => handleBoxClick(e, '/email')}
         >
-          <img src="/images/boxes/email.png" alt="Email" className="w-full h-auto" />
+          <img src="/images/boxes/linkedin.png" alt="Email" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">03</div>
           <div className="absolute bottom-2 left-2 box-label">email</div>
         </Link>
@@ -390,7 +390,7 @@ export default function Home() {
           className="relative max-w-md projects-box block"
           onClick={(e) => handleBoxClick(e, '/projects')}
         >
-          <img src="/images/boxes/projects.png" alt="Projects" className="w-full h-auto" />
+          <img src="/images/boxes/email.png" alt="Projects" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">04</div>
           <div className="absolute bottom-2 left-2 box-label">projects</div>
         </Link>
@@ -405,9 +405,14 @@ export default function Home() {
           rel="noopener noreferrer"
           className="relative max-w-md linkedin-box block"
         >
-          <img src="/images/boxes/linkedin.png" alt="LinkedIn" className="w-full h-auto" />
+          <img src="/images/boxes/projects.png" alt="LinkedIn" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">05</div>
           <div className="absolute bottom-2 left-2 box-label">LinkedIn</div>
+          <div className="absolute top-2 right-2 w-8 h-8">
+            <svg className="w-full h-full text-white" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
         </a>
       ),
     },
@@ -437,6 +442,11 @@ export default function Home() {
           <img src="/images/boxes/github.png" alt="Github" className="w-full h-auto" />
           <div className="absolute top-2 left-2 github-number">07</div>
           <div className="absolute bottom-2 left-2 github-label">Github</div>
+          <div className="absolute top-2 right-2 w-8 h-8">
+            <svg className="w-full h-full text-black" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </div>
         </a>
       ),
     },
@@ -457,6 +467,7 @@ export default function Home() {
     let startY = 0;
     let startX = 0;
     let dy = 0;
+    let dx = 0;
     let isScrolling = false;
 
     const startScroll = (dir) => {
@@ -491,26 +502,43 @@ export default function Home() {
       startY = e.touches[0].clientY;
       startX = e.touches[0].clientX;
       dy = 0;
+      dx = 0;
     };
     
     const onTouchMove = (e) => {
       const y = e.touches[0].clientY;
       const x = e.touches[0].clientX;
-      const dY = startY - y;
-      const dX = startX - x;
-      if (Math.abs(dY) > Math.abs(dX)) {
-        dy = dY;
-      }
+      dy = startY - y;
+      dx = startX - x;
     };
     
     const onTouchEnd = () => {
-      const THRESH = 30;
-      if (Math.abs(dy) > THRESH) {
-        const direction = dy > 0 ? +1 : -1; // swipe up = +1
+      const THRESH = 20; // Balanced threshold
+      const absDy = Math.abs(dy);
+      const absDx = Math.abs(dx);
+      
+      console.log('Touch end - absDy:', absDy, 'absDx:', absDx, 'THRESH:', THRESH);
+      
+      if (absDy > THRESH || absDx > THRESH) {
+        let direction;
+        
+        if (absDy > absDx) {
+          // Vertical swipe
+          direction = dy > 0 ? +1 : -1; // swipe up = +1
+          console.log('Vertical swipe detected, direction:', direction);
+        } else {
+          // Horizontal swipe
+          direction = dx > 0 ? +1 : -1; // swipe left = +1
+          console.log('Horizontal swipe detected, direction:', direction);
+        }
+        
+        console.log('Calling startScroll with direction:', direction);
         startScroll(direction);
         
         // Stop scrolling after a delay
         setTimeout(stopScroll, 500);
+      } else {
+        console.log('Swipe not detected - below threshold');
       }
     };
 
