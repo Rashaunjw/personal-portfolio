@@ -240,26 +240,37 @@ export default function Home() {
   const [radialColor, setRadialColor] = useState('#F4E9E1');
   const [isSqueezing, setIsSqueezing] = useState(false);
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [isContinuingSqueeze, setIsContinuingSqueeze] = useState(false);
+  const [isOpening, setIsOpening] = useState(false);
+  const [isContentVisible, setIsContentVisible] = useState(false);
 
   useEffect(() => {
-    // Only start curtain animation if not squeezing
-    if (!isSqueezing) {
-      // Start line expansion from center
-      const lineTimer = setTimeout(() => {
+    // Check if we should continue squeeze animation from 50%
+    const shouldContinueSqueeze = sessionStorage.getItem('shouldContinueSqueeze');
+    if (shouldContinueSqueeze === 'true') {
+      sessionStorage.removeItem('shouldContinueSqueeze');
+      setIsContinuingSqueeze(true);
+      
+      // After animation completes, show content
+      setTimeout(() => {
+        setIsContinuingSqueeze(false);
+        setIsContentVisible(true);
         setLineExpanded(true);
-      }, 100);
-      
-      // Reveal content after line expansion
-      const contentTimer = setTimeout(() => {
         setContentRevealed(true);
-      }, 1500);
+      }, 1500); // 1.5 seconds for the continue animation
+    } else {
+      // Start normal opening animation
+      setIsOpening(true);
       
-      return () => {
-        clearTimeout(lineTimer);
-        clearTimeout(contentTimer);
-      };
+      // After animation completes, show content
+      setTimeout(() => {
+        setIsOpening(false);
+        setIsContentVisible(true);
+        setLineExpanded(true);
+        setContentRevealed(true);
+      }, 1500); // 1.5 seconds for the opening animation
     }
-  }, [isSqueezing]);
+  }, []);
 
   const getBoxOriginalColor = (href) => {
     const colorMap = {
@@ -528,22 +539,17 @@ export default function Home() {
         />
       )}
       
-      {/* Top curtain that opens upward */}
-      <div className={`fixed top-0 left-0 bg-[#F4E9E1] z-50 transition-all duration-1200 ease-out ${lineExpanded ? '-translate-y-full' : 'translate-y-0'} w-full h-1/2`}>
-      </div>
-      
-      {/* Bottom curtain that opens downward */}
-      <div className={`fixed bottom-0 left-0 bg-[#F4E9E1] z-50 transition-all duration-1200 ease-out ${lineExpanded ? 'translate-y-full' : 'translate-y-0'} w-full h-1/2`}>
-      </div>
-
-      {/* Main page content - revealed as curtain pulls away */}
-      <div className={`min-h-screen relative ${isSqueezing ? 'animate-page-squeeze' : ''}`}>
+      {/* Main page content - revealed with squeeze-style opening */}
+      <div className={`min-h-screen relative ${
+        isContinuingSqueeze ? 'animate-page-squeeze-continue' : 
+        isOpening ? 'animate-page-open' : 
+        isSqueezing ? 'animate-page-squeeze' : ''
+      } ${!isContentVisible ? 'opacity-0' : 'opacity-100'}`}>
         {/* Initials in top left corner */}
         <div className="absolute top-8 left-8">
           <h1 
-            className="text-5xl font-medium cursor-pointer hover:scale-105 transition-transform" 
+            className="text-5xl font-medium cursor-pointer transition-transform" 
             style={{ fontFamily: 'Gucina, sans-serif' }}
-            onClick={handleSqueezeAnimation}
           >
             R J W
           </h1>
