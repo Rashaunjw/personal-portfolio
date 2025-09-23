@@ -328,7 +328,7 @@ export default function Home() {
       content: (
         <Link 
           href="/bio" 
-          className="relative max-w-md bio-box block"
+          className="relative max-w-xs sm:max-w-sm md:max-w-md bio-box block"
           onClick={(e) => handleBoxClick(e, '/bio')}
         >
           <img src="/images/boxes/bio.png" alt="Bio" className="w-full h-auto" />
@@ -343,7 +343,7 @@ export default function Home() {
       content: (
         <Link 
           href="/career" 
-          className="relative max-w-md career-box block"
+          className="relative max-w-xs sm:max-w-sm md:max-w-md career-box block"
           onClick={(e) => handleBoxClick(e, '/career')}
         >
           <img src="/images/boxes/career.png" alt="Career" className="w-full h-auto" />
@@ -358,7 +358,7 @@ export default function Home() {
       content: (
         <Link 
           href="/email" 
-          className="relative max-w-md email-box block"
+          className="relative max-w-xs sm:max-w-sm md:max-w-md email-box block"
           onClick={(e) => handleBoxClick(e, '/email')}
         >
           <img src="/images/boxes/linkedin.png" alt="Email" className="w-full h-auto" />
@@ -373,7 +373,7 @@ export default function Home() {
       content: (
         <Link 
           href="/projects" 
-          className="relative max-w-md projects-box block"
+          className="relative max-w-xs sm:max-w-sm md:max-w-md projects-box block"
           onClick={(e) => handleBoxClick(e, '/projects')}
         >
           <img src="/images/boxes/email.png" alt="Projects" className="w-full h-auto" />
@@ -390,7 +390,7 @@ export default function Home() {
           href="https://www.linkedin.com/in/rashaunwilliams"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative max-w-md linkedin-box block"
+          className="relative max-w-xs sm:max-w-sm md:max-w-md linkedin-box block"
         >
           <img src="/images/boxes/projects.png" alt="LinkedIn" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">05</div>
@@ -408,7 +408,7 @@ export default function Home() {
       content: (
         <Link 
           href="/phone" 
-          className="relative max-w-md phone-box block"
+          className="relative max-w-xs sm:max-w-sm md:max-w-md phone-box block"
           onClick={(e) => handleBoxClick(e, '/phone')}
         >
           <img src="/images/boxes/phone.png" alt="Phone" className="w-full h-auto" />
@@ -425,7 +425,7 @@ export default function Home() {
           href="https://github.com/Rashaunjw"
           target="_blank"
           rel="noopener noreferrer"
-          className="relative max-w-md github-box block"
+          className="relative max-w-xs sm:max-w-sm md:max-w-md github-box block"
         >
           <img src="/images/boxes/github.png" alt="Github" className="w-full h-auto" />
           <div className="absolute top-2 left-2 github-number">07</div>
@@ -570,9 +570,9 @@ export default function Home() {
       {/* Main page content - revealed as curtain pulls away */}
       <div className={`min-h-screen relative ${isSqueezing ? 'animate-page-squeeze' : ''}`}>
         {/* Initials in top left corner */}
-        <div className="absolute top-8 left-8">
+        <div className="absolute top-4 left-4 sm:top-8 sm:left-8">
           <h1 
-            className="text-5xl font-medium cursor-pointer hover:scale-105 transition-transform" 
+            className="text-3xl sm:text-4xl md:text-5xl font-medium cursor-pointer hover:scale-105 transition-transform" 
             style={{ fontFamily: 'Gucina, sans-serif' }}
             onClick={handleSqueezeAnimation}
           >
@@ -580,12 +580,12 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="flex flex-col items-center justify-center min-h-screen gap-8">
+        <div className="flex flex-col items-center justify-center min-h-screen gap-4 sm:gap-6 md:gap-8 px-4">
           {/* TOP: positive steps = LEFT */}
           <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
 
           {/* NAME IN CENTER */}
-          <h2 className="text-[10rem] font-semi-bold my-name" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
             Rashaun J Williams
           </h2>
 

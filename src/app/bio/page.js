@@ -28,20 +28,20 @@ export default function BioPage() {
   return (
     <div className={`min-h-screen bg-[#FF3D00] ${isSqueezing ? 'animate-page-squeeze' : ''}`}>
       {/* Header with animated text */}
-      <div className={`transition-all duration-1000 pt-16 relative ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-        <h2 className="text-6xl mb-30 font-semi-bold text-center text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
+      <div className={`transition-all duration-1000 pt-8 sm:pt-12 md:pt-16 relative ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semi-bold text-center text-white px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
           bio
         </h2>      
       </div>
       
       {/* About me section - moved down */}
-      <div className={`mt-8 flex gap-8 px-8 transition-all duration-1500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
+      <div className={`mt-6 sm:mt-8 flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 transition-all duration-1500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
         <div className="flex-1 flex">
           <div className="bg-[#F4E9E1] rounded-lg p-6 border-l-4 border-blue-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] w-full flex flex-col">
-            <div className="text-4xl font-bold text-center text-black mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-black mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
               About Me
             </div>
-            <div className="text-2xl font-semi-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
+            <div className="text-lg sm:text-xl lg:text-2xl font-semi-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <span className="text-blue-500 mr-3 text-2xl">👨‍💻</span>
@@ -69,10 +69,10 @@ export default function BioPage() {
         </div>
         <div className="flex-1 flex">
           <div className="bg-[#F4E9E1] rounded-lg p-6 border-l-4 border-green-500 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] w-full flex flex-col">
-            <div className="text-4xl font-bold text-center text-black mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-black mb-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
               Info
             </div>
-            <div className="text-3xl font-semi-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
+            <div className="text-lg sm:text-xl lg:text-2xl font-semi-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
               <div className="flex justify-between items-center mb-4 p-3 bg-white bg-opacity-20 rounded-lg">
                 <span className="flex items-center">
                   <span className="text-green-500 mr-3 text-2xl">📍</span>
@@ -113,15 +113,15 @@ export default function BioPage() {
         </div>
       </div>
 
-       <div className="absolute top-8 left-8">
- <h1 
-   onClick={handleSqueezeAnimation}
-   className="text-5xl font-medium text-white transition-transform cursor-pointer hover:scale-110 hover:opacity-80" 
-   style={{ fontFamily: 'Gucina, sans-serif' }}
- >
-   R J W
- </h1>
- </div>
+      <div className="absolute top-4 left-4 sm:top-8 sm:left-8">
+        <h1 
+          onClick={handleSqueezeAnimation}
+          className="text-3xl sm:text-4xl md:text-5xl font-medium text-white transition-transform cursor-pointer hover:scale-110 hover:opacity-80" 
+          style={{ fontFamily: 'Gucina, sans-serif' }}
+        >
+          R J W
+        </h1>
+      </div>
     </div>
   );
 }

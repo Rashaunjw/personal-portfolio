@@ -492,5 +492,59 @@ body {
   animation: pageOpen 1.5s ease;
 }
 
+/* Responsive Design */
+@media (max-width: 640px) {
+  .my-name {
+    line-height: 1.1;
+  }
+  
+  .box-item {
+    min-width: 200px;
+  }
+  
+  .separator {
+    width: 0.5rem;
+    height: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .box-item {
+    min-width: 180px;
+  }
+  
+  .box-number,
+  .box-label,
+  .phone-number,
+  .phone-label,
+  .github-number,
+  .github-label {
+    font-size: 0.875rem;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .bio-box:hover,
+  .career-box:hover,
+  .email-box:hover,
+  .projects-box:hover,
+  .linkedin-box:hover,
+  .phone-box:hover,
+  .github-box:hover {
+    transform: none;
+  }
+  
+  .bio-box:active,
+  .career-box:active,
+  .email-box:active,
+  .projects-box:active,
+  .linkedin-box:active,
+  .phone-box:active,
+  .github-box:active {
+    transform: scale(0.95);
+  }
+}
+
 
 

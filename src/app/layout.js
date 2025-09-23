@@ -17,6 +17,7 @@ export const metadata = {
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>🧙‍♂️</text></svg>",
   },
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }) {
