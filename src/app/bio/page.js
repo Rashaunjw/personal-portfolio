@@ -18,11 +18,11 @@ export default function BioPage() {
   const handleSqueezeAnimation = () => {
     setIsSqueezing(true);
     
-    // Navigate immediately and let main page handle the full animation
+    // Navigate at 50% of animation (when content disappears)
     setTimeout(() => {
       sessionStorage.setItem('shouldContinueSqueeze', 'true');
       window.location.href = '/';
-    }, 100); // Very short delay just to start the squeeze
+    }, 1500); // 1.5 seconds = 50% of 3 second animation
   };
 
   return (

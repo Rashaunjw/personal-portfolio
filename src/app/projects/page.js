@@ -14,10 +14,12 @@ export default function ProjectsPage() {
 
   const handleSqueezeAnimation = () => {
     setIsSqueezing(true);
+    
+    // Navigate at 50% of animation (when content disappears)
     setTimeout(() => {
       sessionStorage.setItem('shouldContinueSqueeze', 'true');
       window.location.href = '/';
-    }, 100);
+    }, 1500); // 1.5 seconds = 50% of 3 second animation
   };
 
   return (
