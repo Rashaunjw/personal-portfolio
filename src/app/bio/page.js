@@ -35,7 +35,7 @@ export default function BioPage() {
           My name is Rashaun Jamal Williams, an aspiring software engineer that enjoys full-stack web and mobile development. I grew up in Warner Robins, Georgia and currently reside in Tennessee where I am studying computer science and philosophy.
           <br />
           <br />
-          If I'm not coding, I'm reading, watching anime, or working out. My favorite extracurricular activities include snowboarding, playing basketball, and running. I love to travel, experience new places, learn new things, and watch tons of movies.
+          If I&apos;m not coding, I&apos;m reading, watching anime, or working out. My favorite extracurricular activities include snowboarding, playing basketball, and running. I love to travel, experience new places, learn new things, and watch tons of movies.
           <br />
           </div>
         </div>
