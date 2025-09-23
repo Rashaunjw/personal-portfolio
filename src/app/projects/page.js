@@ -113,7 +113,7 @@ export default function ProjectsPage() {
             </div>
             <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
               <li>• Languages: Python, Machine Learning libraries, React</li>
-              <li>• What I'm learning: AI/ML integration, optimization algorithms, web APIs</li>
+              <li>• What I&apos;m learning: AI/ML integration, optimization algorithms, web APIs</li>
               <li>• Description: An intelligent scheduling system that optimizes time management using artificial intelligence</li>
             </ul>
           </div>
@@ -124,7 +124,7 @@ export default function ProjectsPage() {
             </div>
             <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
               <li>• Languages: JavaScript, HTML, CSS</li>
-              <li>• What I'm learning: Game mechanics, word processing, user interaction design</li>
+              <li>• What I&apos;m learning: Game mechanics, word processing, user interaction design</li>
               <li>• Description: A web-based word guessing game similar to Wordle with custom difficulty levels</li>
             </ul>
           </div>
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
             </div>
             <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
               <li>• Languages: Python, Pygame</li>
-              <li>• What I'm learning: Game development, collision detection, score systems</li>
+              <li>• What I&apos;m learning: Game development, collision detection, score systems</li>
               <li>• Description: A classic Snake game implementation with modern graphics and smooth gameplay</li>
             </ul>
           </div>
@@ -146,8 +146,8 @@ export default function ProjectsPage() {
             </div>
             <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
               <li>• Languages: JavaScript, Canvas API</li>
-              <li>• What I'm learning: Cellular automata, algorithm visualization, performance optimization</li>
-              <li>• Description: Conway's Game of Life simulation with interactive controls and pattern generation</li>
+              <li>• What I&apos;m learning: Cellular automata, algorithm visualization, performance optimization</li>
+              <li>• Description: Conway&apos;s Game of Life simulation with interactive controls and pattern generation</li>
             </ul>
           </div>
           
@@ -157,7 +157,7 @@ export default function ProjectsPage() {
             </div>
             <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
               <li>• Languages: JavaScript, HTML5 Canvas</li>
-              <li>• What I'm learning: Game physics, AI pathfinding, sprite animation</li>
+              <li>• What I&apos;m learning: Game physics, AI pathfinding, sprite animation</li>
               <li>• Description: A recreation of the classic Pac-Man arcade game with modern web technologies</li>
             </ul>
           </div>
