@@ -17,20 +17,24 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-[#0036D8]">
       {/* Header with animated text */}
-      <div className={`transition-all duration-1000 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
+      <div className={`transition-all duration-1000 pt-16 relative ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
         <h2 className="text-6xl font-semi-bold text-center text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
           projects
         </h2>      
         </div>
+        <div className="absolute top-18 left-40 text-3xl font-semi-bold text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
+          04
+        </div>
 
 
       {/* Back button */}
-      <div className="fixed bottom-8 left-8">
+      <div className="fixed bottom-8 left-18">
         <Link 
           href="/"
-          className="bg-black text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition-colors font-gucina"
+          className="bg-[#F4E9E1] text-black px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+          style={{ fontFamily: 'Gucina, sans-serif', fontSize: '1.5rem', fontWeight: '500' }}
         >
-          RJW
+          R J W
         </Link>
       </div>
     </div>

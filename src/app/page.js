@@ -231,12 +231,108 @@ import Image from 'next/image';
 });
 
 export default function Home() {
+  const [lineExpanded, setLineExpanded] = useState(false);
+  const [contentRevealed, setContentRevealed] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [clickPosition, setClickPosition] = useState({ x: 0, y: 0 });
+  const [targetHref, setTargetHref] = useState('');
+  const [radialExpanded, setRadialExpanded] = useState(false);
+  const [radialColor, setRadialColor] = useState('#F4E9E1');
+  const [isSqueezing, setIsSqueezing] = useState(false);
+  const [hasInitialized, setHasInitialized] = useState(false);
+
+  useEffect(() => {
+    // Only start curtain animation if not squeezing
+    if (!isSqueezing) {
+      // Start line expansion from center
+      const lineTimer = setTimeout(() => {
+        setLineExpanded(true);
+      }, 100);
+      
+      // Reveal content after line expansion
+      const contentTimer = setTimeout(() => {
+        setContentRevealed(true);
+      }, 1500);
+      
+      return () => {
+        clearTimeout(lineTimer);
+        clearTimeout(contentTimer);
+      };
+    }
+  }, [isSqueezing]);
+
+  const getBoxOriginalColor = (href) => {
+    const colorMap = {
+      '/bio': '#FF3D00',      // Original bio box color
+      '/career': '#5900CC',   // Original career box color  
+      '/email': '#000000',    // Original email box color
+      '/projects': '#0036D8', // Original projects box color
+      '/phone': '#39FF14'     // Original phone box color
+    };
+    return colorMap[href] || '#F4E9E1';
+  };
+
+  const handleBoxClick = (event, href) => {
+    event.preventDefault();
+    
+    // Get click position
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    
+    // Get the original box color
+    const boxColor = getBoxOriginalColor(href);
+    
+    setClickPosition({ x, y });
+    setTargetHref(href);
+    setRadialColor(boxColor);
+    setIsTransitioning(true);
+    
+    // Start radial expansion after a short delay
+    setTimeout(() => {
+      setRadialExpanded(true);
+    }, 50);
+    
+    // Navigate after animation completes
+    setTimeout(() => {
+      window.location.href = href;
+    }, 800);
+  };
+
+  const handleSqueezeAnimation = () => {
+    // Reset curtain states first
+    setLineExpanded(false);
+    setContentRevealed(false);
+    
+    // Start squeeze animation
+    setIsSqueezing(true);
+    
+    // After squeeze animation completes, start curtain animation
+    setTimeout(() => {
+      setIsSqueezing(false);
+      
+      // Start curtain animation after squeeze completes
+      setTimeout(() => {
+        setLineExpanded(true);
+      }, 100);
+      
+      setTimeout(() => {
+        setContentRevealed(true);
+      }, 1500);
+    }, 3200);
+  };
+
+
   // Build your 7 boxes with navigation and animations
   const allBoxes = [
     {
       key: 'bio',
       content: (
-        <Link href="/bio" className="relative max-w-md bio-box block">
+        <Link 
+          href="/bio" 
+          className="relative max-w-md bio-box block"
+          onClick={(e) => handleBoxClick(e, '/bio')}
+        >
           <img src="/images/boxes/bio.png" alt="Bio" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">01</div>
           <div className="absolute bottom-2 left-2 box-label">bio</div>
@@ -246,7 +342,11 @@ export default function Home() {
     {
       key: 'career',
       content: (
-        <Link href="/career" className="relative max-w-md career-box block">
+        <Link 
+          href="/career" 
+          className="relative max-w-md career-box block"
+          onClick={(e) => handleBoxClick(e, '/career')}
+        >
           <img src="/images/boxes/career.png" alt="Career" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">02</div>
           <div className="absolute bottom-2 left-2 box-label">career</div>
@@ -256,7 +356,11 @@ export default function Home() {
     {
       key: 'email',
       content: (
-        <Link href="/email" className="relative max-w-md email-box block">
+        <Link 
+          href="/email" 
+          className="relative max-w-md email-box block"
+          onClick={(e) => handleBoxClick(e, '/email')}
+        >
           <img src="/images/boxes/email.png" alt="Email" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">03</div>
           <div className="absolute bottom-2 left-2 box-label">email</div>
@@ -266,7 +370,11 @@ export default function Home() {
     {
       key: 'projects',
       content: (
-        <Link href="/projects" className="relative max-w-md projects-box block">
+        <Link 
+          href="/projects" 
+          className="relative max-w-md projects-box block"
+          onClick={(e) => handleBoxClick(e, '/projects')}
+        >
           <img src="/images/boxes/projects.png" alt="Projects" className="w-full h-auto" />
           <div className="absolute top-2 left-2 box-number">04</div>
           <div className="absolute bottom-2 left-2 box-label">projects</div>
@@ -291,7 +399,11 @@ export default function Home() {
     {
       key: 'phone',
       content: (
-        <Link href="/phone" className="relative max-w-md phone-box block">
+        <Link 
+          href="/phone" 
+          className="relative max-w-md phone-box block"
+          onClick={(e) => handleBoxClick(e, '/phone')}
+        >
           <img src="/images/boxes/phone.png" alt="Phone" className="w-full h-auto" />
           <div className="absolute top-2 left-2 phone-number">06</div>
           <div className="absolute bottom-2 left-2 phone-label">phone</div>
@@ -317,7 +429,7 @@ export default function Home() {
 
   // Create offset arrays to ensure top and bottom never show same boxes
   const topBoxes = allBoxes;
-  const bottomBoxes = [...allBoxes.slice(3), ...allBoxes.slice(0, 3)]; // Offset by 3 positions for better separation
+  const bottomBoxes = [...allBoxes.slice(3), ...allBoxes.slice(0, 3)].reverse(); // Offset by 3 positions for better separation, then reversed
 
   // Refs to control each row
   const topRowRef = useRef(null);
@@ -401,25 +513,54 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
-      {/* Initials in top left corner (kept) */}
-      <div className="absolute top-8 left-8">
-        <h1 className="text-5xl font-medium" style={{ fontFamily: 'Gucina, sans-serif' }}>
-          RJW
-        </h1>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Radial transition overlay */}
+      {isTransitioning && (
+        <div 
+          className="fixed inset-0 z-[60] pointer-events-none"
+          style={{
+            background: radialColor,
+            clipPath: radialExpanded 
+              ? `circle(150% at ${clickPosition.x}px ${clickPosition.y}px)` 
+              : `circle(0% at ${clickPosition.x}px ${clickPosition.y}px)`,
+            transition: 'clip-path 0.8s ease-out'
+          }}
+        />
+      )}
+      
+      {/* Top curtain that opens upward */}
+      <div className={`fixed top-0 left-0 bg-[#F4E9E1] z-50 transition-all duration-1200 ease-out ${lineExpanded ? '-translate-y-full' : 'translate-y-0'} w-full h-1/2`}>
+      </div>
+      
+      {/* Bottom curtain that opens downward */}
+      <div className={`fixed bottom-0 left-0 bg-[#F4E9E1] z-50 transition-all duration-1200 ease-out ${lineExpanded ? 'translate-y-full' : 'translate-y-0'} w-full h-1/2`}>
       </div>
 
-      <div className="flex flex-col items-center justify-center min-h-screen gap-8">
-        {/* TOP: positive steps = LEFT */}
-        <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
+      {/* Main page content - revealed as curtain pulls away */}
+      <div className={`min-h-screen relative ${isSqueezing ? 'animate-page-squeeze' : ''}`}>
+        {/* Initials in top left corner */}
+        <div className="absolute top-8 left-8">
+          <h1 
+            className="text-5xl font-medium cursor-pointer hover:scale-105 transition-transform" 
+            style={{ fontFamily: 'Gucina, sans-serif' }}
+            onClick={handleSqueezeAnimation}
+          >
+            R J W
+          </h1>
+        </div>
 
-        {/* NAME IN CENTER (kept) */}
-        <h2 className="text-[10rem] font-semi-bold my-name" style={{ fontFamily: 'Gucina, sans-serif' }}>
-          Rashaun J Williams
-        </h2>
+        <div className="flex flex-col items-center justify-center min-h-screen gap-8">
+          {/* TOP: positive steps = LEFT */}
+          <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
 
-        {/* BOTTOM: positive steps = RIGHT */}
-        <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} />
+          {/* NAME IN CENTER */}
+          <h2 className="text-[10rem] font-semi-bold my-name" style={{ fontFamily: 'Gucina, sans-serif' }}>
+            Rashaun J Williams
+          </h2>
+
+          {/* BOTTOM: positive steps = RIGHT */}
+          <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} />
+        </div>
       </div>
     </div>
   );

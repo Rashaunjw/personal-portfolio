@@ -352,4 +352,98 @@ body {
   color: black;
 }
 
+/* Curtain Animation - inspired by the CodePen example */
+@keyframes curtain-close {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  10% {
+    transform: scale(1, 0.01);
+    opacity: 1;
+  }
+  35% {
+    transform: scale(0.2, 0.01);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.2, 0.01);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(1, 0.01);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+@keyframes curtain-open {
+  0% {
+    transform: scale(1, 0.01);
+    opacity: 0;
+  }
+  15% {
+    transform: scale(1, 0.01);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.2, 0.01);
+    opacity: 1;
+  }
+  65% {
+    transform: scale(0.2, 0.01);
+    opacity: 0;
+  }
+  90% {
+    transform: scale(1, 0.01);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+.animate-curtain-close {
+  animation: curtain-close 4.5s ease;
+}
+
+.animate-curtain-open {
+  animation: curtain-open 5s ease;
+}
+
+@keyframes pageSqueeze {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  10% {
+    transform: scale(1, 0.002);
+    opacity: 1;
+  }
+  35% {
+    transform: scale(0.2, 0.002);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.2, 0.002);
+    opacity: 0;
+  }
+  85% {
+    transform: scale(1, 0.002);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+}
+
+.animate-page-squeeze {
+  animation: pageSqueeze 3s ease;
+}
+
 
