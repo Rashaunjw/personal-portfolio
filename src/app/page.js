@@ -307,13 +307,13 @@ const MobileSingleBoxCarousel = forwardRef(function MobileSingleBoxCarousel({ it
       <div className="flex justify-center gap-24 mt-14">
         <button 
           onClick={() => setCurrentIndex(prev => (prev - 1 + items.length) % items.length)}
-          className="bg-black text-white px-8 py-2 rounded"
+          className="bg-black text-white px-8 py-2 rounded text-2xl"
         >
           Prev
         </button>
         <button 
           onClick={() => setCurrentIndex(prev => (prev + 1) % items.length)}
-          className="bg-black text-white px-8 py-2 rounded"
+          className="bg-black text-white px-8 py-2 rounded text-2xl"
         >
           Next
         </button>
