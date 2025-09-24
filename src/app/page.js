@@ -442,7 +442,7 @@ export default function Home() {
 
   // Create offset arrays to ensure top and bottom never show same boxes
   const topBoxes = allBoxes;
-  const bottomBoxes = [...allBoxes.slice(3), ...allBoxes.slice(0, 3)].reverse(); // Offset by 3 positions for better separation, then reversed
+  const bottomBoxes = [...allBoxes.slice(3), ...allBoxes.slice(0, 3)]; // Offset by 3 positions for better separation, then reversed
 
   // Refs to control each row
   const topRowRef = useRef(null);

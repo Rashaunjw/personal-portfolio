@@ -52,8 +52,8 @@ export default function CareerPage() {
                 (Pittsburgh, PA), May 2024 - Present
               </div>
               <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
-                <li>• Technologies Learned: Figma, XCode, Apple Connect, React, React-Native, TypeScript, Node.js, PostgreSQL, Docker, YAML, Stripe, Firebase, Go</li>
-                <li>• What I Did: Developed full-stack web applications, implemented user authentication, designed responsive UIs, and collaborated with cross-functional teams</li>
+                <li>• <span className="font-bold">Technologies learned:</span> Figma, XCode, Apple Connect, React, React-Native, TypeScript, Node.js, PostgreSQL, Docker, YAML, Stripe, Firebase, Go</li>
+                <li>• <span className="font-bold">What I did:</span> Developed full-stack web applications, implemented user authentication, designed responsive UIs, and collaborated with cross-functional teams</li>
               </ul>
             </div>
           </div>
@@ -146,8 +146,8 @@ export default function CareerPage() {
                The University of the South | B.S. | Computer Science | Sewanee, TN | 05/2026
              </div>
              <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
-               <li>• Relevant Coursework: Data Structures & Algorithms, Software Engineering, Database Systems, Computer Networks, Operating Systems, Machine Learning</li>
-               <li>• Philosophy Minor: Critical thinking, ethics in technology, logic and reasoning</li>
+               <li>• <span className="font-bold">Relevant coursework:</span> Data Structures & Algorithms, Software Engineering, Database Design w/ Web Applications, Object-Oriented Programming, Computer Systems & Organization, Artificial Intelligence</li>
+               <li>• <span className="font-bold">Philosophy minor:</span> Critical thinking, ethics in technology, logic and reasoning</li>
              </ul>
            </div>
            
