@@ -283,22 +283,6 @@ const MobileSingleBoxCarousel = forwardRef(function MobileSingleBoxCarousel({ it
 
   return (
     <div className="w-full">
-      {/* Navigation buttons */}
-      <div className="flex justify-center gap-4 mb-4">
-        <button 
-          onClick={() => setCurrentIndex(prev => (prev - 1 + items.length) % items.length)}
-          className="bg-black text-white px-4 py-2 rounded"
-        >
-          Prev
-        </button>
-        <button 
-          onClick={() => setCurrentIndex(prev => (prev + 1) % items.length)}
-          className="bg-black text-white px-4 py-2 rounded"
-        >
-          Next
-        </button>
-      </div>
-      
       <div 
         className="w-full overflow-hidden"
         onTouchStart={handleTouchStart}
@@ -317,6 +301,22 @@ const MobileSingleBoxCarousel = forwardRef(function MobileSingleBoxCarousel({ it
             </div>
           ))}
         </div>
+      </div>
+      
+      {/* Navigation buttons */}
+      <div className="flex justify-center gap-24 mt-14">
+        <button 
+          onClick={() => setCurrentIndex(prev => (prev - 1 + items.length) % items.length)}
+          className="bg-black text-white px-8 py-2 rounded"
+        >
+          Prev
+        </button>
+        <button 
+          onClick={() => setCurrentIndex(prev => (prev + 1) % items.length)}
+          className="bg-black text-white px-8 py-2 rounded"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
@@ -768,7 +768,7 @@ export default function Home() {
             <>
               {/* Mobile: Single box carousel */}
               {/* NAME IN CENTER */}
-              <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+              <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4 mb-16" style={{ fontFamily: 'Gucina, sans-serif' }}>
                 Rashaun J Williams
               </h2>
               

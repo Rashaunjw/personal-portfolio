@@ -89,7 +89,7 @@ body {
 
 @media (max-width: 640px) {
   .box-number {
-    font-size: 1.5rem; /* 24px on mobile - larger than before */
+    font-size: 2rem; /* 32px on mobile - much larger */
   }
 }
 
@@ -103,7 +103,7 @@ body {
 
 @media (max-width: 640px) {
   .box-label {
-    font-size: 2.5rem; /* 40px on mobile - much larger */
+    font-size: 3.5rem; /* 56px on mobile - much larger */
   }
 }
 .github-number {
@@ -141,11 +141,11 @@ body {
 /* Mobile responsive font sizes */
 @media (max-width: 640px) {
   .github-number, .phone-number {
-    font-size: 1.5rem; /* 24px on mobile - larger */
+    font-size: 2rem; /* 32px on mobile - much larger */
   }
   
   .github-label, .phone-label {
-    font-size: 2.5rem; /* 40px on mobile - much larger */
+    font-size: 3.5rem; /* 56px on mobile - much larger */
   }
 }
 
