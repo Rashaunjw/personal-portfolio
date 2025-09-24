@@ -283,13 +283,21 @@ const MobileSingleBoxCarousel = forwardRef(function MobileSingleBoxCarousel({ it
 
   return (
     <div className="w-full">
-      {/* Test button */}
-      <button 
-        onClick={() => setCurrentIndex(prev => (prev + 1) % items.length)}
-        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
-      >
-        Test Next Box
-      </button>
+      {/* Navigation buttons */}
+      <div className="flex justify-center gap-4 mb-4">
+        <button 
+          onClick={() => setCurrentIndex(prev => (prev - 1 + items.length) % items.length)}
+          className="bg-black text-white px-4 py-2 rounded"
+        >
+          Prev
+        </button>
+        <button 
+          onClick={() => setCurrentIndex(prev => (prev + 1) % items.length)}
+          className="bg-black text-white px-4 py-2 rounded"
+        >
+          Next
+        </button>
+      </div>
       
       <div 
         className="w-full overflow-hidden"
@@ -759,7 +767,6 @@ export default function Home() {
           })() ? (
             <>
               {/* Mobile: Single box carousel */}
-              <div className="bg-green-500 p-2 mb-4">MOBILE MODE ACTIVE</div>
               {/* NAME IN CENTER */}
               <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
                 Rashaun J Williams
@@ -770,8 +777,7 @@ export default function Home() {
             </>
           ) : (
             <>
-              {/* Wide screen: Both rows */}
-              <div className="bg-yellow-500 p-2 mb-4">DESKTOP MODE ACTIVE</div>
+
               {/* TOP: positive steps = LEFT */}
               <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
 
