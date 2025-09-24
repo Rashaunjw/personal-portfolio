@@ -13,7 +13,7 @@ import Image from 'next/image';
  * Smooth, seamless infinite scroll with duplicated content for seamless looping.
  */
   const BoxRow = forwardRef(function BoxRow(
-    { items, directionMultiplier = 1, gapPx = 32, initialOffsetMultiplier = 1 },
+    { items, directionMultiplier = 1, gapPx = 32, initialOffsetMultiplier = 1, isNarrowScreen = false },
     ref
   ) {
   const trackRef = useRef(null);
@@ -24,6 +24,9 @@ import Image from 'next/image';
   const [translate, setTranslate] = useState(0);
   const [itemWidth, setItemWidth] = useState(0);
   const [isInitialized, setIsInitialized] = useState(false);
+  
+  // Use smaller gap for narrow screens
+  const actualGapPx = isNarrowScreen ? 8 : gapPx;
 
   // Helper function to create items with separators using FOR LOOP
   const createItemsWithSeparators = (items) => {
@@ -69,8 +72,8 @@ import Image from 'next/image';
       if (cards.length > 0) {
         // Measure the actual width including gap
         const cardWidth = cards[0].offsetWidth;
-        const totalWidth = cardWidth + gapPx;
-        console.log('Box width:', cardWidth, 'Gap:', gapPx, 'Total width:', totalWidth);
+        const totalWidth = cardWidth + actualGapPx;
+        console.log('Box width:', cardWidth, 'Gap:', actualGapPx, 'Total width:', totalWidth);
         setItemWidth(totalWidth);
       }
     };
@@ -83,7 +86,7 @@ import Image from 'next/image';
       ro.disconnect();
       window.removeEventListener('resize', measure);
     };
-  }, [gapPx]);
+  }, [actualGapPx]);
 
   // Smooth animation loop with deceleration
   useEffect(() => {
@@ -214,7 +217,7 @@ import Image from 'next/image';
         className="flex flex-row items-center"
         style={{
           transform: `translate3d(${translate}px, 0, 0)`,
-          gap: `${gapPx}px`,
+          gap: `${actualGapPx}px`,
           willChange: 'transform',
         }}
       >
@@ -238,6 +241,20 @@ export default function Home() {
   const [radialColor, setRadialColor] = useState('#F4E9E1');
   const [isSqueezing, setIsSqueezing] = useState(false);
   const [hasInitialized, setHasInitialized] = useState(false);
+  const [hideInitials, setHideInitials] = useState(false);
+  const [isNarrowScreen, setIsNarrowScreen] = useState(false);
+
+  // Narrow screen detection
+  useEffect(() => {
+    const checkNarrowScreen = () => {
+      setIsNarrowScreen(window.innerWidth < 768);
+    };
+    
+    checkNarrowScreen();
+    window.addEventListener('resize', checkNarrowScreen);
+    
+    return () => window.removeEventListener('resize', checkNarrowScreen);
+  }, []);
 
   useEffect(() => {
     // Only start curtain animation if not squeezing
@@ -258,6 +275,62 @@ export default function Home() {
       };
     }
   }, [isSqueezing]);
+
+  // Collision detection for hiding initials when boxes overlap
+  useEffect(() => {
+    const checkCollision = () => {
+      const boxes = document.querySelectorAll('.box-item');
+      const initials = document.querySelector('.initials-container');
+      
+      if (!initials || boxes.length === 0) return;
+      
+      const initialsRect = initials.getBoundingClientRect();
+      const initialsCenterX = initialsRect.left + initialsRect.width / 2;
+      const initialsCenterY = initialsRect.top + initialsRect.height / 2;
+      
+      // Define collision zone around initials (larger area for better detection)
+      const collisionZone = {
+        left: initialsCenterX - 200,
+        right: initialsCenterX + 200,
+        top: initialsCenterY - 100,
+        bottom: initialsCenterY + 100
+      };
+      
+      let isColliding = false;
+      
+      boxes.forEach(box => {
+        const boxRect = box.getBoundingClientRect();
+        const boxCenterX = boxRect.left + boxRect.width / 2;
+        const boxCenterY = boxRect.top + boxRect.height / 2;
+        
+        // Check if box center is within collision zone
+        if (boxCenterX >= collisionZone.left && 
+            boxCenterX <= collisionZone.right &&
+            boxCenterY >= collisionZone.top && 
+            boxCenterY <= collisionZone.bottom) {
+          isColliding = true;
+        }
+      });
+      
+      setHideInitials(isColliding);
+    };
+    
+    // Check collision on scroll and resize
+    const handleScroll = () => {
+      requestAnimationFrame(checkCollision);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    
+    // Initial check
+    setTimeout(checkCollision, 1000);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [contentRevealed]);
 
   const getBoxOriginalColor = (href) => {
     const colorMap = {
@@ -580,7 +653,7 @@ export default function Home() {
       {/* Main page content - revealed as curtain pulls away */}
       <div className={`min-h-screen relative ${isSqueezing ? 'animate-page-squeeze' : ''}`}>
         {/* Initials in top left corner */}
-        <div className="absolute top-4 left-4 sm:top-8 sm:left-8">
+        <div className={`initials-container absolute top-4 left-4 sm:top-8 sm:left-8 transition-opacity duration-300 ${hideInitials ? 'opacity-0' : 'opacity-100'}`}>
           <h1 
             className="text-3xl sm:text-4xl md:text-5xl font-medium cursor-pointer hover:scale-105 transition-transform" 
             style={{ fontFamily: 'Gucina, sans-serif' }}
@@ -591,16 +664,32 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col items-center justify-center min-h-screen gap-4 sm:gap-6 md:gap-8 px-4">
-          {/* TOP: positive steps = LEFT */}
-          <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
+          {isNarrowScreen ? (
+            <>
+              {/* Narrow screen: Only bottom row with centered name */}
+              {/* NAME IN CENTER */}
+              <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                Rashaun J Williams
+              </h2>
+              
+              {/* BOTTOM: positive steps = RIGHT */}
+              <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} isNarrowScreen={isNarrowScreen} />
+            </>
+          ) : (
+            <>
+              {/* Wide screen: Both rows */}
+              {/* TOP: positive steps = LEFT */}
+              <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
 
-          {/* NAME IN CENTER */}
-          <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
-            Rashaun J Williams
-          </h2>
+              {/* NAME IN CENTER */}
+              <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                Rashaun J Williams
+              </h2>
 
-          {/* BOTTOM: positive steps = RIGHT */}
-          <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} />
+              {/* BOTTOM: positive steps = RIGHT */}
+              <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} isNarrowScreen={isNarrowScreen} />
+            </>
+          )}
         </div>
       </div>
     </div>
