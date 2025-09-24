@@ -231,6 +231,89 @@ import Image from 'next/image';
   );
 });
 
+// Mobile Single Box Carousel Component
+const MobileSingleBoxCarousel = forwardRef(function MobileSingleBoxCarousel({ items }, ref) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  useImperativeHandle(ref, () => ({
+    nextBox() {
+      setCurrentIndex(prev => (prev + 1) % items.length);
+    },
+    prevBox() {
+      setCurrentIndex(prev => (prev - 1 + items.length) % items.length);
+    }
+  }));
+
+  const handleTouchStart = (e) => {
+    console.log('Touch start detected');
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    console.log('Touch end detected');
+    if (!touchStart || !touchEnd) {
+      console.log('Missing touch data');
+      return;
+    }
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    console.log('Touch analysis:', { distance, isLeftSwipe, isRightSwipe, currentIndex });
+
+    if (isLeftSwipe) {
+      console.log('Moving to next box');
+      setCurrentIndex(prev => (prev + 1) % items.length);
+    }
+    if (isRightSwipe) {
+      console.log('Moving to previous box');
+      setCurrentIndex(prev => (prev - 1 + items.length) % items.length);
+    }
+  };
+
+
+
+  return (
+    <div className="w-full">
+      {/* Test button */}
+      <button 
+        onClick={() => setCurrentIndex(prev => (prev + 1) % items.length)}
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+      >
+        Test Next Box
+      </button>
+      
+      <div 
+        className="w-full overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div 
+          className="flex transition-transform duration-300 ease-out"
+          style={{
+            transform: `translateX(-${currentIndex * 100}%)`
+          }}
+        >
+          {items.map((item, index) => (
+            <div key={index} className="flex-shrink-0 w-full flex justify-center px-4">
+              {item.content}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+});
+
 export default function Home() {
   const [lineExpanded, setLineExpanded] = useState(false);
   const [contentRevealed, setContentRevealed] = useState(false);
@@ -247,7 +330,9 @@ export default function Home() {
   // Narrow screen detection
   useEffect(() => {
     const checkNarrowScreen = () => {
-      setIsNarrowScreen(window.innerWidth < 768);
+      const isNarrow = window.innerWidth < 768;
+      console.log('Screen width:', window.innerWidth, 'isNarrow:', isNarrow);
+      setIsNarrowScreen(isNarrow);
     };
     
     checkNarrowScreen();
@@ -520,11 +605,15 @@ export default function Home() {
   // Refs to control each row
   const topRowRef = useRef(null);
   const bottomRowRef = useRef(null);
+  const mobileCarouselRef = useRef(null);
 
   // Auto-scroll removed - user-controlled only
 
   // Global wheel/touch → continuous scrolling like Lorenzo Dal Dosso
   useEffect(() => {
+    // Don't add global touch handlers on mobile - let mobile carousel handle them
+    if (isNarrowScreen) return;
+    
     let startY = 0;
     let startX = 0;
     let dy = 0;
@@ -624,7 +713,7 @@ export default function Home() {
       document.removeEventListener('touchmove', onTouchMove);
       document.removeEventListener('touchend', onTouchEnd);
     };
-  }, []);
+  }, [isNarrowScreen]);
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -664,20 +753,25 @@ export default function Home() {
         </div>
 
         <div className="flex flex-col items-center justify-center min-h-screen gap-4 sm:gap-6 md:gap-8 px-4">
-          {isNarrowScreen ? (
+          {(() => {
+            console.log('Render check - isNarrowScreen:', isNarrowScreen, 'window width:', typeof window !== 'undefined' ? window.innerWidth : 'undefined');
+            return isNarrowScreen;
+          })() ? (
             <>
-              {/* Narrow screen: Only bottom row with centered name */}
+              {/* Mobile: Single box carousel */}
+              <div className="bg-green-500 p-2 mb-4">MOBILE MODE ACTIVE</div>
               {/* NAME IN CENTER */}
               <h2 className="text-4xl sm:text-6xl md:text-8xl lg:text-[10rem] font-semi-bold my-name text-center px-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
                 Rashaun J Williams
               </h2>
               
-              {/* BOTTOM: positive steps = RIGHT */}
-              <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} isNarrowScreen={isNarrowScreen} />
+              {/* Mobile single box carousel */}
+              <MobileSingleBoxCarousel ref={mobileCarouselRef} items={allBoxes} />
             </>
           ) : (
             <>
               {/* Wide screen: Both rows */}
+              <div className="bg-yellow-500 p-2 mb-4">DESKTOP MODE ACTIVE</div>
               {/* TOP: positive steps = LEFT */}
               <BoxRow ref={topRowRef} items={topBoxes} directionMultiplier={1.5} initialOffsetMultiplier={40} />
 
@@ -687,7 +781,7 @@ export default function Home() {
               </h2>
 
               {/* BOTTOM: positive steps = RIGHT */}
-              <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} isNarrowScreen={isNarrowScreen} />
+              <BoxRow ref={bottomRowRef} items={bottomBoxes} directionMultiplier={-1.5} />
             </>
           )}
         </div>
