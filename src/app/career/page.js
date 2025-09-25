@@ -34,8 +34,8 @@ export default function CareerPage() {
 
       {/* Technical Experience */}
       <div className={`mt-6 transition-all duration-1500 ${isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
-        <div className="text-left pl-25 pr-8">
-        <div className="text-2xl font-regular text-white mb-10 text-center" style={{ fontFamily: 'Gucina, sans-serif' }}>
+        <div className="text-left pl-25 pr-25">
+        <div className="text-2xl font-regular text-white mb-20 text-center" style={{ fontFamily: 'Gucina, sans-serif' }}>
           A comprehensive overview of my professional journey, technical expertise, and educational background in software development and computer science.
         </div>
             <div className="text-3xl font-semi-bold text-white" style={{ fontFamily: 'Gucina, sans-serif' }}>
@@ -140,7 +140,7 @@ export default function CareerPage() {
           <div className="w-47 h-0.5 bg-white"></div>
         </div>
         <br />
-         <div className="text-2xl pl-25 text-white text-left" style={{ fontFamily: 'Gucina, sans-serif' }}>
+         <div className="text-2xl pl-25 pr-25 text-white text-left" style={{ fontFamily: 'Gucina, sans-serif' }}>
            <div className="bg-[#F4E9E1] rounded-lg p-4 mb-4 border-l-4 border-yellow-500">
              <div className="text-2xl font-bold text-black mb-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
                The University of the South | B.S. | Computer Science | Sewanee, TN | 05/2026
@@ -164,7 +164,7 @@ export default function CareerPage() {
        </div>
 
        {/* Bottom padding */}
-       <div className="pb-32"></div>
+       <div className="pb-22"></div>
 
 
       {/* Clickable monogram */}
