@@ -9,7 +9,6 @@ _A Next.js portfolio site to showcase projects, lessons learned, and development
 2. [Demo / Live Site](#demo--live-site)  
 3. [Features](#features)  
 4. [Tech Stack](#tech-stack)  
-5. [Getting Started](#getting-started)  
 
 ---
 
