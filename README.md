@@ -23,3 +23,18 @@ Goals include:
 
 You can view the live deployment here:  
 [https://www.rjwportfolio.app](https://www.rjwportfolio.app) 
+
+---
+
+## Tech Stack
+
+| Layer | Technologies / Tools |
+|---|---|
+| **Framework** | [Next.js](https://nextjs.org/) (React-based) |
+| **Language** | JavaScript / JSX |
+| **Styling** | Tailwind CSS, PostCSS |
+| **Fonts & Icons** | Geist, Google Fonts, Lucide Icons |
+| **Build / Config** | Next.js App Router, ESLint, Prettier |
+| **Deployment** | Vercel (Continuous Deployment via GitHub) |
+| **Version Control** | Git & GitHub |
+| **Hosting** | [Vercel](https://vercel.com) (Edge-optimized hosting) |
