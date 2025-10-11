@@ -10,12 +10,6 @@ _A Next.js portfolio site to showcase projects, lessons learned, and development
 3. [Features](#features)  
 4. [Tech Stack](#tech-stack)  
 5. [Getting Started](#getting-started)  
-6. [Development](#development)  
-7. [Deployment](#deployment)  
-8. [Folder Structure](#folder-structure)  
-9. [Contributing](#contributing)  
-10. [License](#license)  
-11. [Contact](#contact)  
 
 ---
 
@@ -63,36 +57,3 @@ You can view the live deployment here:
 | Bundling / Build | Next.js built-in, Webpack / SWC |
 | Deployment | Vercel (recommended for Next.js) :contentReference[oaicite:3]{index=3} |
 
----
-
-## Getting Started
-
-To run the project locally:
-
-```bash
-# Clone the repo
-git clone https://github.com/Rashaunjw/personal-portfolio.git
-
-cd personal-portfolio
-
-# Install dependencies
-npm install
-# or
-yarn
-# or
-pnpm install
-
-# Start development server
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
