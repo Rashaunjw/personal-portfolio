@@ -7,8 +7,7 @@ _A Next.js portfolio site to showcase projects, lessons learned, and development
 
 1. [About / Vision](#about--vision)  
 2. [Demo / Live Site](#demo--live-site)  
-3. [Features](#features)  
-4. [Tech Stack](#tech-stack)  
+3. [Tech Stack](#tech-stack)  
 
 ---
 
@@ -31,17 +30,6 @@ Goals include:
 You can view the live deployment here:  
 [https://www.rjwportfolio.app](https://www.rjwportfolio.app) :contentReference[oaicite:0]{index=0}
 
----
-
-## Features
-
-- Clean, responsive UI  
-- Dark / light mode (if implemented)  
-- Project pages with detailed write-ups (pitfalls, architecture, lessons)  
-- Blog or notes section (optional / future)  
-- Code syntax highlighting  
-- Performance optimizations (lazy loading, image optimization, etc.)  
-- SEO & metadata support  
 
 ---
 
