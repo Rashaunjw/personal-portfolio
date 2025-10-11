@@ -22,4 +22,4 @@ Goals include:
 ## Demo / Live Site
 
 You can view the live deployment here:  
-[https://www.rjwportfolio.app](https://www.rjwportfolio.app) :contentReference[oaicite:0]{index=0}
+[https://www.rjwportfolio.app](https://www.rjwportfolio.app) 
