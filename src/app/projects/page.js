@@ -41,7 +41,43 @@ export default function ProjectsPage() {
           Completed: 
           </div>
           <br />
-          
+
+          <div className="bg-[#F4E9E1] rounded-lg p-4 mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 border-l-4 border-teal-500">
+            <div className="flex justify-between items-center mb-2">
+              <div className="text-2xl font-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                Edge of Chaos (Cellular Automata Research Exhibit): August 2025 - March 2026
+              </div>
+              <div className="flex gap-4">
+                <a href="https://edge-of-chaos-phi.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:text-teal-800 transition-colors underline decoration-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                  Click here to view
+                </a>
+              </div>
+            </div>
+            <ul className="text-xl text-black mb-2 ml-4 space-y-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
+              <li>• <span className="font-bold">Technologies:</span> Next.js (App Router), React, TypeScript, Tailwind CSS, Framer Motion</li>
+              <li>• <span className="font-bold">Description:</span> An interactive research exhibit built for my senior oral presentation, exploring how complex, life-like behavior emerges from simple rules — and how the most interesting complexity occurs at the boundary between order and chaos</li>
+              <li>• <span className="font-bold">Process & Pitfalls:</span> Built live interactive demos for 1D elementary cellular automata, Conway&apos;s Game of Life, and a lambda parameter explorer. Struggled with optimizing large grid rendering and synchronizing simulation state with user input controls. Learned to use canvas-based rendering and efficient state diffing for performance.</li>
+              <li>• <span className="font-bold">What I learned:</span> Cellular automata algorithms, canvas rendering, complex systems theory, interactive simulation design, TypeScript, Framer Motion animations</li>
+            </ul>
+          </div>
+
+          <div className="bg-[#F4E9E1] rounded-lg p-4 mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 border-l-4 border-amber-500">
+            <div className="flex justify-between items-center mb-2">
+              <div className="text-2xl font-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                PlanEra (AI Study Planner): 2025 - Present
+              </div>
+              <a href="https://plan-era.com/" target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-800 transition-colors underline decoration-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                Click here to view
+              </a>
+            </div>
+            <ul className="text-xl text-black mb-2 ml-4 space-y-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
+              <li>• <span className="font-bold">Technologies:</span> Next.js, React, TypeScript, AI/LLM integration, Tailwind CSS</li>
+              <li>• <span className="font-bold">Description:</span> An AI-powered study planning web app built for students — upload a syllabus (PDF, Word doc, or plain text) and the AI extracts every assignment, exam, and deadline in under 60 seconds. Features a visual calendar, color-coded urgency tinting, grade-weight awareness, and zero manual data entry</li>
+              <li>• <span className="font-bold">Process & Pitfalls:</span> Started with basic PDF parsing, struggled with unstructured syllabus formats and inconsistent date/deadline extraction. Had to fine-tune prompts to handle edge cases across different professor formatting styles. Also worked through authentication flow and keeping user data private.</li>
+              <li>• <span className="font-bold">What I learned:</span> AI/LLM prompt engineering, document parsing, full-stack product development, user authentication, PWA setup for mobile home screen installation</li>
+            </ul>
+          </div>
+
           <div className="bg-[#F4E9E1] rounded-lg p-4 mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 border-l-4 border-blue-500">
             <div className="flex justify-between items-center mb-2">
               <div className="text-2xl font-bold text-black" style={{ fontFamily: 'Gucina, sans-serif' }}>
@@ -148,18 +184,6 @@ export default function ProjectsPage() {
           </div>
           <br />
           
-          <div className="bg-[#F4E9E1] rounded-lg p-4 mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 border-l-4 border-indigo-500">
-            <div className="text-2xl font-bold text-black mb-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
-            AI Scheduler
-            </div>
-            <ul className="text-xl text-black mb-2 ml-4 space-y-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
-              <li>• <span className="font-bold">Technologies:</span> Python, Machine Learning libraries, React</li>
-              <li>• <span className="font-bold">Description:</span> An intelligent scheduling system that optimizes time management using artificial intelligence</li>
-              <li>• <span className="font-bold">Process & Pitfalls:</span> Started with basic ML models, struggling with data preprocessing and feature engineering, having issues with model accuracy. Learning to implement proper training pipelines and handle edge cases in scheduling algorithms.</li>
-              <li>• <span className="font-bold">What I&apos;m learning:</span> AI/ML integration, optimization algorithms, web APIs, data preprocessing</li>
-            </ul>
-          </div>
-          
           <div className="bg-[#F4E9E1] rounded-lg p-4 mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 border-l-4 border-pink-500">
             <div className="text-2xl font-bold text-black mb-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
             Snake Game
@@ -169,18 +193,6 @@ export default function ProjectsPage() {
               <li>• <span className="font-bold">Description:</span> A classic Snake game implementation with modern graphics and smooth gameplay</li>
               <li>• <span className="font-bold">Process & Pitfalls:</span> Started with basic Pygame setup, struggling with collision detection and game loop optimization, having issues with score tracking and game state management. Learning to implement proper game architecture and performance optimization.</li>
               <li>• <span className="font-bold">What I&apos;m learning:</span> Game development, collision detection, score systems, performance optimization</li>
-            </ul>
-          </div>
-          
-          <div className="bg-[#F4E9E1] rounded-lg p-4 mb-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-2 border-l-4 border-cyan-500">
-            <div className="text-2xl font-bold text-black mb-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
-            Conway&apos;s Game of Life (Cellular Automata) August 2025 - Present
-            </div>
-            <ul className="text-xl text-black mb-2 ml-4 space-y-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
-              <li>• <span className="font-bold">Technologies:</span> Python, Canvas API</li>
-              <li>• <span className="font-bold">Description:</span> Conway&apos;s Game of Life simulation with interactive controls and pattern generation. This is a project that I am working on for my senior oral presentation.</li>
-              <li>• <span className="font-bold">Process & Pitfalls:</span> Started with basic Canvas drawing, struggling with algorithm optimization for large grids, having issues with pattern generation and user interaction. Learning to implement efficient cellular automata algorithms and interactive controls.</li>
-              <li>• <span className="font-bold">What I&apos;m learning:</span> Cellular automata, algorithm visualization, performance optimization, interactive design</li>
             </ul>
           </div>
           

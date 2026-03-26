@@ -56,6 +56,26 @@ export default function CareerPage() {
                 <li>• <span className="font-bold">What I did:</span> Developed full-stack web applications, implemented user authentication, designed responsive UIs, and collaborated with cross-functional teams</li>
               </ul>
             </div>
+
+            <div className="bg-[#F4E9E1] rounded-lg p-4 mb-4 border-l-4 border-blue-500">
+              <div className="text-2xl font-bold text-black mb-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                Junior Cloud/DevOps Engineer (Intern) at Sewanee Volunteer Fire Department (Sewanee, TN), Jan 2026 - Present
+              </div>
+              <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                <li>• Built and maintained CI/CD pipelines to automate testing, builds, and deployments for a production application serving a local fire department</li>
+                <li>• Managed deployment workflows and iterated on features used by real customers, incorporating feedback while maintaining system reliability</li>
+              </ul>
+            </div>
+
+            <div className="bg-[#F4E9E1] rounded-lg p-4 mb-4 border-l-4 border-purple-500">
+              <div className="text-2xl font-bold text-black mb-2" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                Research Assistant at Psychology Research Lab, The University of the South (Sewanee, TN), Jan 2026 - Present
+              </div>
+              <ul className="text-xl text-black mb-2 ml-4" style={{ fontFamily: 'Gucina, sans-serif' }}>
+                <li>• Translated experimental design requirements into functional software systems in collaboration with faculty researchers</li>
+                <li>• Debugged and optimized software workflows to maintain system stability and performance during lab sessions</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
